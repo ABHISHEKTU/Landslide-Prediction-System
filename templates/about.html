@@ -1,0 +1,251 @@
+{% include 'home_header.html' %}
+
+<style>
+    :root {
+        --primary-dark: #0F2F3A;
+        --accent-teal: #37C2CC;
+        --soft-bg: #f8fafb;
+        --text-main: #2d3436;
+        --text-muted: #636e72;
+    }
+
+    .about-section {
+        background: var(--soft-bg);
+        padding: 80px 0;
+        font-family: 'Inter', sans-serif; /* Recommended professional font */
+    }
+
+    /* ===== MODERN HERO SECTION ===== */
+    .hero-container {
+        position: relative;
+        background: var(--primary-dark);
+        background: linear-gradient(145deg, #0F2F3A 0%, #164a58 100%);
+        color: white;
+        padding: 100px 40px;
+        border-radius: 24px;
+        margin-bottom: 100px;
+        overflow: hidden;
+        box-shadow: 0 20px 50px rgba(15, 47, 58, 0.15);
+    }
+
+    .hero-container h2 {
+        font-size: 3rem;
+        font-weight: 800;
+        letter-spacing: -1px;
+        margin-bottom: 20px;
+    }
+
+    .hero-container p {
+        font-size: 1.2rem;
+        opacity: 0.9;
+        max-width: 750px;
+        margin: 0 auto;
+        line-height: 1.6;
+    }
+
+    /* ===== CONTENT STYLING ===== */
+    .section-title {
+        font-size: 2.2rem;
+        font-weight: 700;
+        color: var(--primary-dark);
+        margin-bottom: 25px;
+        position: relative;
+    }
+
+    .section-title::after {
+        content: '';
+        display: block;
+        width: 60px;
+        height: 4px;
+        background: var(--accent-teal);
+        margin-top: 15px;
+        border-radius: 2px;
+    }
+
+    .about-content p {
+        font-size: 1.1rem;
+        color: var(--text-muted);
+        line-height: 1.8;
+        margin-bottom: 20px;
+    }
+
+    /* ===== FEATURE CARDS (CLEANER) ===== */
+    .feature-card {
+        background: #ffffff;
+        border: 1px solid rgba(0,0,0,0.05);
+        padding: 40px 30px;
+        border-radius: 20px;
+        transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        height: 100%;
+    }
+
+    .feature-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 30px 60px rgba(0,0,0,0.08);
+        border-color: var(--accent-teal);
+    }
+
+    .icon-wrapper {
+        width: 60px;
+        height: 60px;
+        background: rgba(55, 194, 204, 0.1);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+
+    /* ===== STATS BAR (SOPHISTICATED) ===== */
+    .stats-wrapper {
+        background: #ffffff;
+        border-radius: 20px;
+        padding: 60px;
+        margin: 100px 0;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+    }
+
+    .stat-item h2 {
+        font-size: 3rem;
+        font-weight: 800;
+        color: var(--primary-dark);
+        margin-bottom: 5px;
+    }
+
+    .stat-item p {
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: var(--accent-teal);
+    }
+
+    /* ===== MISSION STATEMENT ===== */
+    .mission-box {
+        background: var(--primary-dark);
+        color: white;
+        padding: 60px;
+        border-radius: 24px;
+        text-align: center;
+        position: relative;
+    }
+
+    .mission-box h4 {
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        font-size: 0.9rem;
+        margin-bottom: 20px;
+        color: var(--accent-teal);
+    }
+
+    .mission-box blockquote {
+        font-size: 1.8rem;
+        font-weight: 500;
+        max-width: 900px;
+        margin: 0 auto;
+        line-height: 1.4;
+    }
+</style>
+
+<section class="about-section">
+    <div class="container">
+
+        <div class="hero-container text-center">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <h2>Advancing Geological Safety Through Intelligence</h2>
+                    <p>L-Predictor is a cutting-edge AI ecosystem designed to mitigate disaster impact through high-precision landslide forecasting and real-time environmental monitoring.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row align-items-center mb-5">
+            <!-- <div class="col-lg-6 mb-4 mb-lg-0">
+                <div class="about-img pe-lg-5">
+                    <img src="/static/common/assets/images/about/about-image.svg" class="img-fluid" alt="Analytics Illustration">
+                </div>
+            </div> -->
+
+            <div class="col-lg-6 about-content">
+                <h3 class="section-title">The Future of Risk Prediction</h3>
+                <p>Traditional landslide monitoring often relies on manual observation and fragmented data. Our platform bridges this gap by integrating <strong>Deep Learning</strong> architectures with hyper-local environmental data.</p>
+                
+                <p>By leveraging <strong>Convolutional Neural Networks (CNN)</strong> such as ResNet and Inception, L-Predictor processes multi-spectral satellite imagery to identify subtle geological shifts that are invisible to the human eye.</p>
+
+                <div class="row mt-4">
+                    <div class="col-6">
+                        <ul class="list-unstyled">
+                            <li><i class="lni lni-check-mark-circle me-2" style="color:var(--accent-teal)"></i> AI Risk Profiling</li>
+                            <li><i class="lni lni-check-mark-circle me-2" style="color:var(--accent-teal)"></i> Satellite Analysis</li>
+                        </ul>
+                    </div>
+                    <div class="col-6">
+                        <ul class="list-unstyled">
+                            <li><i class="lni lni-check-mark-circle me-2" style="color:var(--accent-teal)"></i> Live Weather Data</li>
+                            <li><i class="lni lni-check-mark-circle me-2" style="color:var(--accent-teal)"></i> Early Alerting</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-4 mt-5">
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <div class="icon-wrapper">
+                        <i class="lni lni-user" style="font-size:1.5rem; color:var(--accent-teal);"></i>
+                    </div>
+                    <h5>User Safety</h5>
+                    <p>Localized SMS and App alerts providing clear evacuation routes and emergency communication.</p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <div class="icon-wrapper">
+                        <i class="lni lni-shield" style="font-size:1.5rem; color:var(--accent-teal);"></i>
+                    </div>
+                    <h5>Authority Interface</h5>
+                    <p>A comprehensive toolset for government agencies to validate reports and coordinate rapid responses.</p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <div class="icon-wrapper">
+                        <i class="lni lni-layers" style="font-size:1.5rem; color:var(--accent-teal);"></i>
+                    </div>
+                    <h5>System Control</h5>
+                    <p>A centralized administrative backbone ensuring data integrity and system-wide management.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="stats-wrapper shadow-sm">
+            <div class="row text-center">
+                <div class="col-md-4 stat-item">
+                    <h2>95<span style="color:var(--accent-teal)">%</span></h2>
+                    <p>Model Accuracy</p>
+                </div>
+                <div class="col-md-4 stat-item">
+                    <h2>Active</h2>
+                    <p>Real-Time Monitoring</p>
+                </div>
+                <div class="col-md-4 stat-item">
+                    <h2>24/7</h2>
+                    <p>Incident Support</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="mission-box">
+            <h4>Our Core Objective</h4>
+            <blockquote>
+                "To engineer a scalable, life-saving AI infrastructure that transforms raw environmental data into actionable intelligence, ensuring communities are prepared before disaster strikes."
+            </blockquote>
+        </div>
+
+    </div>
+</section>
+
+{% include 'home_footer.html' %}

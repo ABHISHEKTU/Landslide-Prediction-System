@@ -1,0 +1,153 @@
+{% include 'user_header.html' %}
+    <style>
+
+    body {
+        background: linear-gradient(135deg, #0F2F3A, #1B5E63);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    /* Remove excessive <br> spacing */
+    body br {
+        display: none;
+    }
+
+   
+
+    table {
+    width: 60%;
+    margin: 40px auto 80px auto;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+    text-align: center;   /* Center everything inside table */
+}
+
+th, td {
+    text-align: center;   /* Force center alignment */
+    vertical-align: middle;
+}
+
+th {
+    background-color: #1B5E63;
+    color: white;
+    padding: 16px;
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+
+td {
+    padding: 14px;
+    color: #0F2F3A;
+    font-size: 15px;
+}
+    tr:nth-child(even) {
+        background-color: #f4fcfd;
+    }
+
+    tr:hover {
+        background-color: #37C2CC;
+        transition: 0.3s ease;
+    }
+
+    tr:hover td {
+        color: white;
+        font-weight: 500;
+    }
+
+    /* Proper spacing below navbar */
+h2 {
+    margin-top: 90px;   /* Controls gap between header and heading */
+    margin-bottom: 30px;
+    font-weight: 700;
+    font-size: 28px;
+    color: #ffffff;
+    text-align: center;
+    position: relative;
+}
+
+/* Underline Accent */
+h2::after {
+    content: "";
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, #37C2CC, #2FAFB8);
+    display: block;
+    margin: 10px auto 0;
+    border-radius: 10px;
+}
+
+/* Clean table spacing */
+
+/* Remove space below heading section */
+.section,
+.hero-area,
+.page-header {
+    padding-bottom: 0px !important;
+    margin-bottom: 0px !important;
+}
+
+/* Remove table top gap */
+table {
+    margin: 0 auto 80px auto !important;
+}
+/* Reduce top padding of hero/page section */
+/* Subtle alert pulse animation */
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(55,194,204, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(55,194,204, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(55,194,204, 0); }
+}
+table {
+    animation: pulse 2.5s infinite;
+}
+/* Create a standard gap below the navbar */
+.main-content-area {
+    padding-top: 140px; /* Adjust this value based on your navbar height */
+    padding-bottom: 60px;
+    min-height: 70vh; /* Ensures the footer stays down if there are few rows */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Remove the margin-top from h2 since the container now handles the gap */
+h2 {
+    margin-top: 0 !important; 
+    margin-bottom: 40px;
+    color: #ffffff;
+    text-align: center;
+}
+
+/* Keep the table centered and clean */
+table {
+    margin: 0 auto !important;
+    width: 60%;
+}
+
+
+</style>
+</head>
+<body>
+    <div class="main-content-area">
+        <h2>Helpline Numbers</h2>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Helpline Name</th>
+                    <th>Helpline Number</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for helpline in helpline_numbers %}
+                <tr>
+                    <td>{{ helpline.name }}</td>
+                    <td>{{ helpline.phone }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+{% include 'user_footer.html' %}

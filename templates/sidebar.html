@@ -1,0 +1,75 @@
+<hr class="sidebar-divider">
+
+<div class="sidebar-heading">Emergency Operations</div>
+
+<li class="nav-item">
+    <a class="nav-link" href="{% url 'emergency_notification' %}">
+        <i class="fas fa-fw fa-bell"></i>
+        <span>Emergency Notification</span>
+    </a>
+</li>
+
+<li class="nav-item">
+    <a class="nav-link" href="{% url 'manage_helpline' %}">
+        <i class="fas fa-fw fa-phone-alt"></i>
+        <span>Manage Helpline</span>
+    </a>
+</li>
+
+<hr class="sidebar-divider">
+
+<div class="sidebar-heading">Authority Management</div>
+
+<li class="nav-item">
+    <a class="nav-link" href="{% url 'admin_manage_authority' %}">
+        <i class="fas fa-fw fa-user-plus"></i>
+        <span>Add Authority</span>
+    </a>
+</li>
+
+<li class="nav-item">
+    <a class="nav-link" href="{% url 'admin_view_authority' %}">
+        <i class="fas fa-fw fa-user-shield"></i>
+        <span>View Authority</span>
+    </a>
+</li>
+
+<hr class="sidebar-divider">
+
+<div class="sidebar-heading">Data & Logs</div>
+
+<li class="nav-item">
+    <a class="nav-link" href="{% url 'view_reporting_admin' %}">
+        <i class="fas fa-fw fa-map-marked-alt"></i>
+        <span>Authority Reports</span>
+    </a>
+</li>
+
+<li class="nav-item">
+    <a class="nav-link" href="{% url 'view_reporting_admin2' %}">
+        <i class="fas fa-fw fa-users"></i>
+        <span>User Reports</span>
+    </a>
+</li>
+
+<li class="nav-item">
+    <a class="nav-link" href="{% url 'view_complaints' %}">
+        <i class="fas fa-fw fa-clipboard-list"></i>
+        <span>Complaints</span>
+    </a>
+</li>
+
+<hr class="sidebar-divider d-none d-md-block">
+
+<div class="text-center d-none d-md-inline">
+    <button class="rounded-circle border-0" id="sidebarToggle"></button>
+</div>
+
+<li class="nav-item nav-logout mt-auto">
+    <a class="nav-link" href="{% url 'logout' %}">
+        <div class="logout-wrapper" style="background: rgba(231, 74, 59, 0.1); border-radius: 10px; padding: 5px 10px;">
+            <i class="fas fa-fw fa-sign-out-alt text-danger"></i>
+            <span class="text-danger font-weight-bold">Log Out</span>
+        </div>
+    </a>
+</li>

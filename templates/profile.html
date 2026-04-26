@@ -1,0 +1,146 @@
+{% include 'authority_header.html' %}
+
+<style>
+    /* Global Background */
+    body {
+        background-color: #f4f9f9;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    /* Profile Container */
+    .profile-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 50px 20px;
+    }
+
+    /* Modern Profile Card */
+    .profile-card {
+        background: #ffffff;
+        width: 100%;
+        max-width: 500px;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(15, 47, 58, 0.1);
+        border: 1px solid rgba(0,0,0,0.05);
+    }
+
+    /* Card Header */
+    .card-header-accent {
+        background: linear-gradient(135deg, #1B5E63, #0F2F3A);
+        padding: 40px 20px;
+        text-align: center;
+        color: white;
+    }
+
+    .card-header-accent i {
+        font-size: 50px;
+        margin-bottom: 10px;
+        color: #37C2CC;
+    }
+
+    .card-header-accent h2 {
+        margin: 0;
+        font-weight: 600;
+        letter-spacing: 1px;
+    }
+
+    /* Profile Details List */
+    .profile-details {
+        padding: 30px;
+    }
+
+    .detail-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 12px 0;
+        border-bottom: 1px solid #eee;
+    }
+
+    .detail-item:last-child {
+        border-bottom: none;
+    }
+
+    .detail-label {
+        font-weight: 700;
+        color: #1B5E63;
+        text-transform: uppercase;
+        font-size: 0.85rem;
+    }
+
+    .detail-value {
+        color: #0F2F3A;
+        font-weight: 500;
+    }
+
+    /* Professional Button */
+    .btn-update {
+        display: block;
+        width: 100%;
+        background-color: #2FAFB8;
+        color: white;
+        text-align: center;
+        padding: 15px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        border: none;
+        border-radius: 0 0 15px 15px;
+    }
+
+    .btn-update:hover {
+        background-color: #1B5E63;
+        color: white;
+        text-decoration: none;
+    }
+
+    /* Icon spacing */
+    .detail-item i {
+        width: 25px;
+        color: #37C2CC;
+    }
+</style>
+
+<div class="profile-container">
+    {% if user_profile %}
+    <div class="profile-card">
+        <div class="card-header-accent">
+            <i class="fas fa-user-circle"></i>
+            <h2>{{ user_profile.USER_ID.username }}</h2>
+            <small style="color: #37C2CC;">Authorized Personnel</small>
+        </div>
+
+        <div class="profile-details">
+            <div class="detail-item">
+                <span class="detail-label"><i class="fas fa-id-badge"></i> Name</span>
+                <span class="detail-value">{{ user_profile.name }}</span>
+            </div>
+            <div class="detail-item">
+                <span class="detail-label"><i class="fas fa-map-marker-alt"></i> District</span>
+                <span class="detail-value">{{ user_profile.district }}</span>
+            </div>
+            <div class="detail-item">
+                <span class="detail-label"><i class="fas fa-location-arrow"></i> Place</span>
+                <span class="detail-value">{{ user_profile.place }}</span>
+            </div>
+            <div class="detail-item">
+                <span class="detail-label"><i class="fas fa-phone"></i> Phone</span>
+                <span class="detail-value">{{ user_profile.phone }}</span>
+            </div>
+            <div class="detail-item">
+                <span class="detail-label"><i class="fas fa-envelope"></i> Email</span>
+                <span class="detail-value">{{ user_profile.email }}</span>
+            </div>
+        </div>
+<!-- 
+        <a href="/update_profile/" class="btn-update">
+            <i class="fas fa-edit"></i> Update Profile Information
+        </a> -->
+    </div>
+    {% else %}
+    <div class="alert alert-warning">No profile data found.</div>
+    {% endif %}
+</div>
+
+{% include 'authority_footer.html' %}

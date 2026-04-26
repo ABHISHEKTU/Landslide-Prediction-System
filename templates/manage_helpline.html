@@ -1,0 +1,159 @@
+{% include 'admin_header.html' %}
+<div>
+     {% if messages %}
+        <div style="position: absolute; top: 100px; width: 100%; text-align: center;">
+            {% for message in messages %}
+                <p style="color: white; padding: 10px; border-radius: 5px; display: inline-block;" 
+                   class="{% if message.tags == 'success' %}bg-success{% else %} bg-danger {% endif %}">
+                   {{ message }}
+                </p>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+</div>
+
+<div class="container-fluid">
+    <div class="welcome-banner shadow-sm d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="h3 mb-0 text-gray-800">Helpline Management</h1>
+            <p class="mb-0 text-muted">Maintain emergency contact numbers for public assistance.</p>
+        </div>
+        <i class="fas fa-phone-square-alt fa-2x text-teal" style="color: #37C2CC;"></i>
+    </div>
+
+    <div class="row">
+        <div class="col-xl-4 col-lg-5">
+            <div class="card shadow mb-4 border-left-teal">
+                <div class="card-header py-3" style="background: white;">
+                    <h6 class="m-0 font-weight-bold text-navy" style="color: #0F2F3A;">
+                        <i class="fas fa-plus-circle mr-2"></i>Add New Contact
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <form method="POST" style="box-shadow: none; padding: 0; width: 100%;">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label class="stat-card-title font-weight-bold text-uppercase mb-1">Agency/Service Name</label>
+                            <input type="text" class="form-control bg-light border-0" name="helpline_name" placeholder="e.g., Rescue Team Alpha" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="stat-card-title font-weight-bold text-uppercase mb-1">Emergency Number</label>
+                            <input type="tel" class="form-control bg-light border-0" name="helpline_number" placeholder="e.g., 91XXXXXXXX" required>
+                        </div>
+
+                        <button type="submit" class="btn btn-teal btn-block text-white shadow-sm font-weight-bold py-2 mt-4" 
+                                style="background: linear-gradient(90deg, #37C2CC, #1B5E63); border: none; border-radius: 8px;">
+                            <i class="fas fa-save mr-2"></i>Save Helpline
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="card bg-navy text-white shadow" style="background: #0F2F3A; border-radius: 15px;">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-uppercase mb-1" style="color: #37C2CC;">Public Visibility</div>
+                            <div class="small">These numbers are visible to all users on the mobile application for immediate assistance.</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-info-circle fa-2x text-gray-500"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-8 col-lg-7">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between" style="background: white;">
+                    <h6 class="m-0 font-weight-bold text-navy" style="color:#0F2F3A">Directory List</h6>
+                    <!-- <span class="badge badge-teal text-white p-2" style="background: #1B5E63;">Active Support</span> -->
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover" width="100%" cellspacing="0">
+                            <thead class="bg-light">
+                                <tr class="text-navy" style="color: #0F2F3A; font-size: 0.8rem; text-transform: uppercase;">
+                                    <th>Service Name</th>
+                                    <th>Contact Number</th>
+                                    <th class="text-center">Quick Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for i in b %}
+                                <tr>
+                                    <td class="align-middle">
+                                        <i class="fas fa-headset mr-2 text-teal"></i>
+                                        <span class="font-weight-bold text-gray-800">{{ i.name }}</span>
+                                    </td>
+                                    <td class="align-middle">
+                                        <span class="badge badge-light p-2" style="font-size: 1rem; color: #1B5E63;">
+                                            <i class="fas fa-phone-alt mr-2 text-success"></i>{{ i.phone }}
+                                        </span>
+                                    </td>
+                                    <td class="text-center align-middle">
+                                        <button class="btn btn-sm btn-circle btn-outline-danger shadow-sm">
+                                            <a href="{% url 'admin_delete_helpline' i.id %}"> <i class="fas fa-trash"></i></a>
+                                        </button>
+                                    </td>
+                                </tr>
+                                {% empty %}
+                                <tr>
+                                    <td colspan="3" class="text-center text-muted py-4">No helpline numbers registered yet.</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="border-radius: 15px; border: none;">
+            <div class="modal-header" style="background: #0F2F3A; color: white; border-top-left-radius: 15px; border-top-right-radius: 15px;">
+                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                <button class="close text-white" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Select "Logout" below if you are ready to end your current session. 
+                <br><small class="text-muted">Ensure all critical landslide alerts have been processed.</small>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal" style="border-radius: 8px;">Cancel</button>
+                <a class="btn btn-danger" href="{% url 'logout' %}" style="border-radius: 8px; background: #e74a3b;">Logout</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content" style="border-radius: 15px; border: none; overflow: hidden;">
+            <div class="modal-header" style="background: #0F2F3A; color: white;">
+                <h5 class="modal-title" id="logoutLabel">Confirm Logout</h5>
+                <button class="close text-white" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body text-center py-4">
+                <i class="fas fa-exclamation-circle fa-3x text-warning mb-3"></i>
+                <p class="mb-0">Are you sure you want to end your session?</p>
+                <small class="text-muted">Any unsaved landslide data analysis may be lost.</small>
+            </div>
+            <div class="modal-footer bg-light">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <a class="btn btn-danger" href="{% url 'logout' %}" style="background: #e74a3b;">Logout Now</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% include 'admin_footer.html' %}

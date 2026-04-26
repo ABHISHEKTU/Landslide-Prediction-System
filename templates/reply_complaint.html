@@ -1,0 +1,91 @@
+{% include 'admin_header.html' %}
+     <style>
+
+/* ===== Keep Header Safe ===== */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* ===== Centered Card Form ===== */
+body form {
+    background: #ffffff;
+    padding: 45px 45px;
+    border-radius: 16px;
+    width: 400px;
+    margin: 90px auto;
+    box-shadow: 0 25px 60px rgba(15, 47, 58, 0.08);
+    animation: fadeSlide 0.4s ease;
+}
+
+/* ===== Title ===== */
+body form h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #0F2F3A;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+/* ===== Input Field ===== */
+body form input[type="text"] {
+    width: 100%;
+    padding: 14px 15px;
+    margin-bottom: 25px;
+    border: 1px solid #dceeee;
+    border-radius: 10px;
+    font-size: 14px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+/* Focus Effect */
+body form input[type="text"]:focus {
+    border-color: #37C2CC;
+    box-shadow: 0 0 0 3px rgba(55, 194, 204, 0.15);
+}
+
+/* ===== Submit Button ===== */
+body form input[type="submit"] {
+    width: 100%;
+    background: linear-gradient(90deg, #37C2CC, #2FAFB8);
+    color: white;
+    border: none;
+    font-weight: 600;
+    padding: 13px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 15px;
+}
+
+/* Hover Effect */
+body form input[type="submit"]:hover {
+    background: linear-gradient(90deg, #2FAFB8, #1B5E63);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(15, 47, 58, 0.2);
+}
+
+/* ===== Animation ===== */
+@keyframes fadeSlide {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+</style>
+</head>
+<body>
+    <form method="post">
+        {% csrf_token %}
+        <h2>Reply Complaint</h2>
+        <!-- <label>Title:</label><br><br> -->
+        <input type="text" id="reply" name="reply" ><br><br>
+        <input type="submit" value="Send Reply">
+    </form>
+{% include 'admin_footer.html' %}

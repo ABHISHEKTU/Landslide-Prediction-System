@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Landslide Predictor | Professional AI Safety</title>
+
+    <link rel="stylesheet" href="/static/common/assets/css/bootstrap-5.0.0-beta2.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-dark: #0F2F3A;
+            --accent-teal: #37C2CC;
+            --glass-white: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(55, 194, 204, 0.15);
+            --text-muted: #a3b1b6;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-dark) !important;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        /* ===== MODERN NAVBAR ===== */
+        .header {
+            background: rgba(15, 47, 58, 0.85) !important;
+            backdrop-filter: blur(15px);
+            padding: 15px 0;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .navbar-brand {
+            font-weight: 800;
+            letter-spacing: -1px;
+            color: var(--accent-teal) !important;
+            font-size: 1.5rem;
+        }
+
+        .nav-link {
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: 0.3s;
+            margin: 0 10px;
+        }
+
+        .nav-link:hover { color: var(--accent-teal) !important; }
+
+        /* ===== HERO SECTION ===== */
+        .hero-section {
+            padding: 160px 0 100px 0;
+            position: relative;
+        }
+
+        /* Abstract Glow Backgrounds */
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -10%; right: -10%;
+            width: 400px; height: 400px;
+            background: radial-gradient(circle, rgba(55, 194, 204, 0.15) 0%, transparent 70%);
+            z-index: -1;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            line-height: 1.1;
+            background: linear-gradient(135deg, #ffffff 50%, var(--accent-teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 25px;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 35px;
+        }
+
+        /* ===== BUTTONS ===== */
+        .main-btn {
+            background: var(--accent-teal);
+            color: var(--bg-dark);
+            padding: 16px 40px;
+            border-radius: 12px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: inline-block;
+            box-shadow: 0 10px 30px rgba(55, 194, 204, 0.3);
+        }
+
+        .main-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(55, 194, 204, 0.5);
+            color: var(--bg-dark);
+        }
+
+        /* ===== STATS SECTION ===== */
+        .stats-card {
+            background: var(--glass-white);
+            border: 1px solid var(--glass-border);
+            padding: 30px;
+            border-radius: 20px;
+            transition: 0.3s;
+        }
+
+        .stat-number {
+            color: var(--accent-teal);
+            font-size: 3rem;
+            font-weight: 800;
+            display: block;
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* ===== FEATURE BOXES ===== */
+        .feature-box {
+            background: var(--glass-white);
+            padding: 45px 35px;
+            border-radius: 24px;
+            border: 1px solid var(--glass-border);
+            height: 100%;
+            transition: 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-box:hover {
+            background: rgba(55, 194, 204, 0.05);
+            transform: translateY(-10px);
+            border-color: var(--accent-teal);
+        }
+
+        .feature-box i {
+            font-size: 3rem;
+            margin-bottom: 25px;
+            display: block;
+            background: linear-gradient(135deg, var(--accent-teal), #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .feature-box h4 {
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+
+        /* ===== STEP PROGRESS ===== */
+        .step-circle {
+            width: 60px;
+            height: 60px;
+            background: var(--bg-dark);
+            border: 2px solid var(--accent-teal);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            color: var(--accent-teal);
+            margin: 0 auto 20px;
+            font-size: 1.2rem;
+            box-shadow: 0 0 20px rgba(55, 194, 204, 0.2);
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            padding: 80px 0 30px;
+            border-top: 1px solid var(--glass-border);
+            background: rgba(0,0,0,0.2);
+        }
+
+        .footer h5 {
+            color: #fff;
+            font-weight: 700;
+            margin-bottom: 25px;
+        }
+
+        .footer a {
+            color: var(--text-muted);
+            transition: 0.3s;
+        }
+
+        .footer a:hover {
+            color: var(--accent-teal);
+            padding-left: 5px;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <header class="header sticky-top">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-dark">
+                <a class="navbar-brand" href="#"><i class="fas fa-mountain me-2"></i>LP.AI</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navContent">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navContent">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link px-3" href="{% url 'home' %}">Home</a></li>
+                        <li class="nav-item"><a class="nav-link px-3" href="{% url 'about' %}">How it Works</a></li>
+                        <li class="nav-item"><a class="nav-link px-3" href="{% url 'login' %}">Login</a></li>
+                        <li class="nav-item ms-lg-3"><a class="main-btn py-2 px-4" style="font-size: 0.9rem;" href="{% url 'user_registration' %}">Sign Up</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
+    
+    <section class="hero-section text-center">
+        <div class="container">
+            <div class="hero-content" data-aos="zoom-in">
+                <span class="badge rounded-pill mb-3" style="background: rgba(55, 194, 204, 0.1); color: var(--accent-teal); border: 1px solid var(--glass-border); padding: 10px 20px;">
+                    <i class="fas fa-shield-alt me-2"></i> Next-Gen Prediction Engine
+                </span>
+                <h1>Protecting Lives Through <br> Intelligent Prediction</h1>
+                <p>Deploying advanced neural networks and satellite telemetry to forecast geo-hazards with unprecedented precision.</p>
+                <div class="d-flex justify-content-center gap-3">
+                    <a href="{% url 'login' %}" class="main-btn">Access Dashboard</a>
+                    <a href="#features" class="btn btn-outline-light py-3 px-4" style="border-radius: 12px; font-weight: 600;">Technical Specs</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="pb-5">
+        <div class="container">
+            <div class="row g-4 text-center">
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="stats-card">
+                        <span class="stat-number">95.4%</span>
+                        <span class="stat-label">Prediction Precision</span>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="stats-card">
+                        <span class="stat-number">Real-Time</span>
+                        <span class="stat-label">Network Latency</span>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="stats-card">
+                        <span class="stat-number">10k+</span>
+                        <span class="stat-label">Sensors Deployed</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="section-padding py-5" style="background: #fdfdfd; margin-top: 100px !important; border-radius: 60px 60px 0 0;">
+        <div class="container py-5">
+            <div class="text-center mb-5">
+                <h6 class="text-uppercase fw-bold" style="color: var(--accent-teal); letter-spacing: 3px;">Features</h6>
+                <h2 style="color: var(--bg-dark); font-weight: 800; font-size: 2.5rem;">The LP.AI Safety Stack</h2>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="feature-box bg-white shadow-sm" style="border: 1px solid #eee;" data-aos="fade-up">
+                        <i class="fas fa-satellite-dish"></i>
+                        <h4 style="color: var(--bg-dark);">Satellite Telemetry</h4>
+                        <p style="color: #666;">Multi-spectral imaging from orbit detects microscopic terrain shifts before they become hazards.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-box bg-white shadow-sm" style="border: 1px solid #eee;" data-aos="fade-up" data-aos-delay="100">
+                        <i class="fas fa-brain"></i>
+                        <h4 style="color: var(--bg-dark);">Deep Learning</h4>
+                        <p style="color: #666;">Our proprietary AI models analyze historical soil data to identify high-probability risk patterns.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-box bg-white shadow-sm" style="border: 1px solid #eee;" data-aos="fade-up" data-aos-delay="200">
+                        <i class="fas fa-broadcast-tower"></i>
+                        <h4 style="color: var(--bg-dark);">Immediate Warning</h4>
+                        <p style="color: #666;">Automated protocols trigger emergency broadcasts to local communities within seconds of detection.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding py-5" style="background: var(--bg-dark);">
+        <div class="container py-5">
+            <div class="text-center mb-5">
+                <h2 style="color: #fff; font-weight: 800;">Deployment Protocol</h2>
+                <p style="color: var(--text-muted);">How we transition data from sensors to safety.</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-3 text-center" data-aos="fade-right">
+                    <div class="step-circle">01</div>
+                    <h5>Harvesting</h5>
+                    <p class="small text-muted">Ingesting data from 100+ environmental vectors.</p>
+                </div>
+                <div class="col-md-3 text-center" data-aos="fade-right" data-aos-delay="100">
+                    <div class="step-circle">02</div>
+                    <h5>Processing</h5>
+                    <p class="small text-muted">Neural engines correlate moisture & slope vectors.</p>
+                </div>
+                <div class="col-md-3 text-center" data-aos="fade-right" data-aos-delay="200">
+                    <div class="step-circle">03</div>
+                    <h5>Evaluation</h5>
+                    <p class="small text-muted">Risk assessment scores generated in milliseconds.</p>
+                </div>
+                <div class="col-md-3 text-center" data-aos="fade-right" data-aos-delay="300">
+                    <div class="step-circle">04</div>
+                    <h5>Alerting</h5>
+                    <p class="small text-muted">Geo-fenced SMS and Siren protocols activate.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-5">
+                    <h4 class="fw-bold" style="color: var(--accent-teal);">LP.AI</h4>
+                    <p class="mt-4 text-muted">We provide mission-critical landslide intelligence for governments and humanitarian agencies worldwide.</p>
+                </div>
+                <div class="col-lg-2 offset-lg-2 mb-4">
+                    <h5>Resources</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-decoration-none">Documentation</a></li>
+                        <li><a href="#" class="text-decoration-none">API Access</a></li>
+                        <li><a href="#" class="text-decoration-none">Privacy</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <h5>Get in Touch</h5>
+                    <p class="text-muted"><i class="fas fa-envelope me-2"></i> operations@lp-ai.safety</p>
+                    <div class="d-flex gap-3 mt-3">
+                        <a href="#"><i class="fab fa-twitter fa-lg"></i></a>
+                        <a href="#"><i class="fab fa-linkedin fa-lg"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center pt-5 mt-5" style="border-top: 1px solid var(--glass-border);">
+                <p class="small text-muted">© 2026 Landslide Prediction AI. All Systems Operational.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="/static/common/assets/js/bootstrap-5.0.0-beta2.min.js"></script>
+    <script>
+        AOS.init({ duration: 1000, once: true });
+    </script>
+</body>
+</html>

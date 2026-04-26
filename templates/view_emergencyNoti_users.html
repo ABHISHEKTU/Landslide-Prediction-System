@@ -1,0 +1,144 @@
+{% include 'user_header.html' %}
+    <style>
+
+body {
+    background: linear-gradient(135deg, #0F2F3A, #1B5E63);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* ===== PAGE TITLE ===== */
+h2 {
+    margin-top: 90px;
+    margin-bottom: 40px;
+    text-align: center;
+    color: white;
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    position: relative;
+}
+
+/* Underline Accent */
+h2::after {
+    content: "";
+    width: 70px;
+    height: 4px;
+    background: linear-gradient(90deg, #37C2CC, #2FAFB8);
+    display: block;
+    margin: 12px auto 0;
+    border-radius: 10px;
+}
+
+/* ===== TABLE ===== */
+table {
+    width: 75%;
+    margin: 0 auto 100px auto;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    text-align: center;
+}
+
+/* Header */
+th {
+    background-color: #1B5E63;
+    color: white;
+    padding: 20px;
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+
+/* Data */
+td {
+    padding: 18px;
+    font-size: 16px;
+    color: #0F2F3A;
+    border-bottom: 1px solid #e6f7f8;
+}
+
+/* Alternate row */
+tr:nth-child(even) {
+    background-color: #f4fcfd;
+}
+
+/* Hover highlight */
+tr:hover {
+    background-color: #37C2CC;
+    transition: 0.3s ease;
+}
+
+tr:hover td {
+    color: white;
+    font-weight: 600;
+}
+
+/* Remove old border */
+table[border] {
+    border: none;
+}
+
+/* ===== Emergency Alert Badge Effect ===== */
+td:first-child {
+    font-weight: 600;
+}
+
+/* Subtle alert pulse animation */
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(55,194,204, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(55,194,204, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(55,194,204, 0); }
+}
+
+table {
+    animation: pulse 2.5s infinite;
+}
+/* ===== MAIN CONTENT WRAPPER ===== */
+.main-content {
+    /* Adjust 140px based on the actual height of your header */
+    padding-top: 140px; 
+    padding-bottom: 80px;
+    min-height: 80vh; /* Keeps the footer at the bottom on empty pages */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Remove the margin-top from h2 because the wrapper now handles it */
+h2 {
+    margin-top: 0 !important; 
+    margin-bottom: 30px;
+}
+
+/* Table adjustment to ensure it stays centered */
+table {
+    margin: 0 auto !important;
+    width: 75%;
+}
+
+</style>
+</head>
+<body>
+    <div class="main-content">
+        <h2> Admin Notifications</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for notification in emergency_notifications %}
+                <tr>
+                    <td>{{ notification.title }}</td>
+                    <td>{{ notification.description }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+{% include 'user_footer.html' %}

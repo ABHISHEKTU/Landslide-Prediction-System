@@ -1,0 +1,240 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Authority Dashboard</title>
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+
+<link href="/static/admin/css/sb-admin-2.min.css" rel="stylesheet">
+<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdn.lineicons.com/3.0/lineicons.css" />
+
+<style>
+
+/* ===== GLOBAL ===== */
+body{
+    background:#f4f9f9;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* ===== BRAND TEXT ===== */
+.brand-text {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+}
+
+.brand-text i {
+    color: #2FAFB8;
+    font-size: 22px;
+}
+
+/* ===== NAVBAR ===== */
+.topbar {
+    background: rgba(15, 47, 58, 0.95) !important;
+    backdrop-filter: blur(10px);
+    padding: 0.5rem 2rem;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.navbar-nav {
+    margin-left: auto !important;
+}
+
+.navbar-nav .nav-link {
+    color: #cfd8dc !important;
+    font-weight: 500;
+}
+
+.navbar-nav .nav-link:hover {
+    color: white !important;
+}
+
+.navbar-nav .nav-item {
+    margin-left: 10px;
+}
+
+/* ===== HOME BUTTON ===== */
+.btn-nav-home {
+    background: rgba(255, 255, 255, 0.08);
+    color: #ffffff !important;
+    padding: 8px 18px;
+    border-radius: 8px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: 0.3s ease;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+.btn-nav-home:hover {
+    background: #2FAFB8;
+    color: #fff !important;
+    box-shadow: 0 4px 12px rgba(47, 175, 184, 0.4);
+    transform: translateY(-2px);
+}
+
+/* ===== LOGOUT BUTTON ===== */
+.btn-nav-logout {
+    background: linear-gradient(135deg, #ff4d4d, #ff6b6b);
+    color: white !important;
+    padding: 8px 18px;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.3s ease;
+    border: none;
+}
+
+.btn-nav-logout:hover {
+    background: linear-gradient(135deg, #ff2e2e, #ff4d4d);
+    box-shadow: 0 5px 15px rgba(255, 77, 77, 0.5);
+    transform: translateY(-2px);
+}
+
+/* ===== HERO ===== */
+.dashboard-hero {
+    background: #0F2F3A;
+    color: white;
+    padding: 100px 0 140px;
+    text-align: center;
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    margin-left: -50vw;
+}
+
+/* ===== CARDS ===== */
+.card{
+    border:none;
+    border-radius:10px;
+}
+
+.dashboard-cards{
+    padding:50px 0;
+}
+
+.action-card{
+    display:block;
+    background:white;
+    padding:25px;
+    border-radius:10px;
+    text-align:center;
+    text-decoration:none;
+    color:#333;
+    box-shadow:0 4px 15px rgba(0,0,0,0.08);
+    transition:0.3s;
+}
+
+.action-card:hover{
+    transform:translateY(-5px);
+    background:#1B5E63;
+    color:white;
+}
+
+</style>
+
+</head>
+
+<body id="page-top">
+
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar navbar-expand-lg topbar static-top shadow">
+    <div class="container-fluid">
+
+        <div class="d-flex align-items-center">
+            <span class="brand-text">
+                <i class="fas fa-mountain me-2"></i> LANDSLIDE PREDICTOR
+            </span>
+        </div>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav align-items-center">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'profile' %}">Profile</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'report_landslide_authority' %}">My Reports</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'view_reporting_authority' %}">User Reports</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'send_complaint_authority' %}">Complaint</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link px-2" href="{% url 'view_emergencyNoti_authority' %}">
+                        <i class="fas fa-bell"></i>
+                    </a>
+                </li>
+
+                <!-- ACTION BUTTONS -->
+                <li class="nav-item ms-lg-3 d-flex align-items-center">
+
+                    <a href="{% url 'authority_home' %}" class="btn-nav-home me-2">
+                        <i class="fas fa-home me-1"></i> Home
+                    </a>
+
+                    <a class="btn-nav-logout" href="#" data-toggle="modal" data-target="#logoutModal">
+                        <i class="fas fa-power-off me-1"></i> Logout
+                    </a>
+
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- ===== HERO SECTION ===== -->
+<!-- <section class="dashboard-hero">
+    <div class="container">
+        <h2>Welcome, Bangalore</h2>
+        <p>Authority Control Center. Securely monitor system metrics and analytical tools.</p>
+    </div>
+</section> -->
+
+<!-- ===== LOGOUT MODAL ===== -->
+<div class="modal fade" id="logoutModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title">Ready to Leave?</h5>
+                <button class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <div class="modal-body">
+                Select "Logout" below if you are ready to end your session.
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <a class="btn btn-primary" style="background:#0F2F3A;" href="{% url 'logout' %}">Logout</a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,229 @@
+{% include 'home_header.html' %}
+<style>
+    :root {
+        --accent-teal: #37C2CC;
+        --bg-dark: #0F2F3A;
+        --glass-bg: rgba(255, 255, 255, 0.03);
+        --glass-border: rgba(55, 194, 204, 0.15);
+        --text-muted: #a3b1b6;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        background: radial-gradient(circle at top right, #1B5E63, transparent),
+                    radial-gradient(circle at bottom left, #141E30, transparent),
+                    #0F2F3A;
+        background-size: cover;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        color: #ffffff;
+        overflow-x: hidden;
+    }
+
+    /* Animated background movement */
+    body::before {
+        content: "";
+        position: fixed;
+        top: 0; left: 0; width: 100%; height: 100%;
+        background: linear-gradient(-45deg, #0F2F3A, #1B5E63, #091a1f, #141E30);
+        background-size: 400% 400%;
+        animation: gradientMove 15s ease infinite;
+        z-index: -1;
+    }
+
+    @keyframes gradientMove {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    .login-section {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 60px 20px;
+    }
+
+    form {
+        width: 100%;
+        max-width: 440px;
+        padding: 55px 45px;
+        border-radius: 32px;
+        background: var(--glass-bg);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid var(--glass-border);
+        box-shadow: 0 40px 100px rgba(0, 0, 0, 0.4);
+        animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    form h1 {
+        text-align: center;
+        font-weight: 800;
+        font-size: 34px;
+        letter-spacing: -1px;
+        margin-bottom: 12px;
+        background: linear-gradient(135deg, #ffffff 50%, var(--accent-teal));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    form p.subtitle {
+        text-align: center;
+        color: var(--text-muted);
+        font-size: 15px;
+        margin-bottom: 45px;
+        font-weight: 400;
+    }
+
+    label {
+        display: flex;
+        align-items: center;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        color: var(--accent-teal);
+        margin-bottom: 12px;
+        opacity: 0.9;
+    }
+
+    label i {
+        margin-right: 10px;
+        font-size: 14px;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+        width: 100%;
+        padding: 16px 20px;
+        margin-bottom: 28px;
+        border-radius: 14px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        font-size: 15px;
+        background: rgba(0, 0, 0, 0.25);
+        color: #ffffff;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-sizing: border-box;
+    }
+
+    input:focus {
+        border-color: var(--accent-teal);
+        background: rgba(0, 0, 0, 0.4);
+        box-shadow: 0 0 0 4px rgba(55, 194, 204, 0.15);
+        outline: none;
+        transform: translateY(-1px);
+    }
+
+    input::placeholder {
+        color: rgba(255, 255, 255, 0.25);
+    }
+
+    input[type="submit"] {
+        width: 100%;
+        padding: 18px;
+        border-radius: 16px;
+        border: none;
+        background: var(--accent-teal);
+        color: var(--bg-dark);
+        font-size: 16px;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+        cursor: pointer;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        box-shadow: 0 10px 30px rgba(55, 194, 204, 0.25);
+        margin-top: 10px;
+    }
+
+    input[type="submit"]:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 20px 40px rgba(55, 194, 204, 0.4);
+        background: #4de2ed;
+    }
+
+    .register-link {
+        text-align: center; 
+        font-size: 14px; 
+        margin-top: 30px; 
+        color: var(--text-muted);
+    }
+
+    .register-link a {
+        color: var(--accent-teal); 
+        text-decoration: none; 
+        font-weight: 700;
+        margin-left: 5px;
+        transition: 0.3s;
+    }
+
+    .register-link a:hover {
+        color: #ffffff;
+        text-shadow: 0 0 10px rgba(55, 194, 204, 0.5);
+    }
+
+    /* Message Alert Styling */
+    .alert-container {
+        position: fixed;
+        top: 110px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 1000;
+        width: 100%;
+        max-width: 400px;
+    }
+
+    .custom-alert {
+        padding: 12px 25px;
+        border-radius: 12px;
+        font-weight: 600;
+        font-size: 14px;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255,255,255,0.1);
+        display: inline-block;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    @keyframes fadeUp {
+        from { opacity: 0; transform: translateY(30px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+</style> 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<body>
+    {% if messages %}
+        <div class="alert-container">
+            {% for message in messages %}
+                <div class="custom-alert {% if message.tags == 'success' %}bg-success text-white{% else %} bg-danger text-white {% endif %}">
+                    <i class="fas {% if message.tags == 'success' %}fa-check-circle{% else %}fa-exclamation-triangle{% endif %} me-2"></i>
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <div class="login-section">  
+        <form method="POST">
+            {% csrf_token %}
+            <h1>Welcome Back</h1>
+            <p class="subtitle">Secure access to LP.AI prediction engine</p>
+
+            <label><i class="fas fa-shield-halved"></i> Identity / Username</label>
+            <input type="text" id="username" name="uname" placeholder="Enter your credentials" required>
+
+            <label><i class="fas fa-lock"></i> Encryption Key / Password</label>
+            <input type="password" id="password" name="password" placeholder="••••••••••••" required>
+
+            <input type="submit" value="Login">
+            
+            <div class="register-link">
+                New to the system? <a href="/user_registration">Request Access</a>
+            </div>
+        </form>
+    </div>
+
+{% include 'home_footer.html' %}
