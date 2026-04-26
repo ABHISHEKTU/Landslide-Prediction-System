@@ -1,0 +1,117 @@
+{% include 'admin_header.html' %}
+
+<div class="container-fluid">
+    <div class="welcome-banner shadow-sm d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="h3 mb-0 text-gray-800">Public Incident Feed</h1>
+            <p class="mb-0 text-muted">Crowdsourced landslide reports and observations from local citizens.</p>
+        </div>
+        <div class="text-right">
+            <i class="fas fa-users fa-2x text-teal" style="color: #37C2CC;"></i>
+        </div>
+    </div>
+
+    <div class="card shadow mb-4">
+        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between" style="background: white;">
+            <h6 class="m-0 font-weight-bold text-navy" style="color:#0F2F3A">Citizen Submissions</h6>
+            <span class="badge badge-pill badge-light text-primary border">
+                Total Reports: {{ user_reports|length }}
+            </span>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover align-items-center" width="100%" cellspacing="0">
+                    <thead class="bg-light">
+                        <tr class="text-navy" style="color: #0F2F3A; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px;">
+                            <th>Reporter</th>
+                            <th>Date & Time</th>
+                            <th>Coordinates</th>
+                            <th class="text-center">Map View</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for report in user_reports %}
+                        <tr>
+                            <td class="align-middle">
+                                <div class="d-flex align-items-center">
+                                    <div class="rounded-circle bg-light d-flex align-items-center justify-content-center mr-2" style="width: 30px; height: 30px;">
+                                        <i class="fas fa-user text-gray-400" style="font-size: 12px;"></i>
+                                    </div>
+                                    <span class="font-weight-bold text-gray-800">{{ report.userProfile_ID.first_name }}</span>
+                                </div>
+                            </td>
+                            <td class="align-middle small text-muted">
+                                <div><i class="far fa-calendar-alt mr-1"></i> {{ report.date }}</div>
+                                <div><i class="far fa-clock mr-1"></i> {{ report.time }}</div>
+                            </td>
+                            <td class="align-middle">
+                                <code class="bg-light p-1 rounded text-teal" style="font-size: 0.85rem;">
+                                    {{ report.latitude }}, {{ report.longitude }}
+                                </code>
+                            </td>
+                            <td class="text-center align-middle">
+                                <a href="https://www.google.com/maps?q={{ report.latitude }},{{ report.longitude }}" 
+                                   target="_blank" 
+                                   class="btn btn-sm btn-outline-teal" 
+                                   style="border-radius: 20px; border-color: #37C2CC; color: #37C2CC;">
+                                    <i class="fas fa-external-link-alt mr-1"></i> Locate
+                                </a>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="4" class="text-center py-5"> <div class="text-gray-300 mb-3"><i class="fas fa-inbox fa-3x"></i></div>
+                                <p class="text-muted">No public reports have been submitted yet.</p>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="border-radius: 15px; border: none;">
+            <div class="modal-header" style="background: #0F2F3A; color: white; border-top-left-radius: 15px; border-top-right-radius: 15px;">
+                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                <button class="close text-white" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Select "Logout" below if you are ready to end your current session. 
+                <br><small class="text-muted">Ensure all critical landslide alerts have been processed.</small>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal" style="border-radius: 8px;">Cancel</button>
+                <a class="btn btn-danger" href="{% url 'logout' %}" style="border-radius: 8px; background: #e74a3b;">Logout</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content" style="border-radius: 15px; border: none; overflow: hidden;">
+            <div class="modal-header" style="background: #0F2F3A; color: white;">
+                <h5 class="modal-title" id="logoutLabel">Confirm Logout</h5>
+                <button class="close text-white" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body text-center py-4">
+                <i class="fas fa-exclamation-circle fa-3x text-warning mb-3"></i>
+                <p class="mb-0">Are you sure you want to end your session?</p>
+                <small class="text-muted">Any unsaved landslide data analysis may be lost.</small>
+            </div>
+            <div class="modal-footer bg-light">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <a class="btn btn-danger" href="{% url 'logout' %}" style="background: #e74a3b;">Logout Now</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include 'admin_footer.html' %}

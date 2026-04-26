@@ -1,0 +1,124 @@
+{% include 'admin_header.html' %}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8">
+            <div class="card shadow-lg border-0" style="border-radius: 15px; overflow: hidden;">
+                <div class="card-header py-4 text-center" style="background: #0F2F3A; border: none;">
+                    <h2 class="h4 mb-0 text-white font-weight-bold" style="letter-spacing: 1px;">
+                        <i class="fas fa-user-edit mr-2 text-teal" style="color: #37C2CC;"></i> Edit Authority Profile
+                    </h2>
+                    <p class="text-white-50 small mb-0 mt-2">Update regional authority credentials and contact details</p>
+                </div>
+
+                <div class="card-body p-4 p-md-5">
+                    <form method="post" class="needs-validation">
+                        {% csrf_token %}
+                        
+                        <div class="form-group mb-4">
+                            <label class="form-label text-navy font-weight-bold" for="authority_name">
+                                <i class="fas fa-building mr-1 small text-muted"></i> Authority Name
+                            </label>
+                            <input type="text" id="authority_name" class="form-control custom-input" 
+                                   value="{{ authority.name }}" name="authority_name" required>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 form-group mb-4">
+                                <label class="form-label text-navy font-weight-bold" for="district">
+                                    <i class="fas fa-map-marker-alt mr-1 small text-muted"></i> District
+                                </label>
+                                <input type="text" id="district" class="form-control custom-input" 
+                                       value="{{ authority.district }}" name="district" required>
+                            </div>
+                            <div class="col-md-6 form-group mb-4">
+                                <label class="form-label text-navy font-weight-bold" for="place">
+                                    <i class="fas fa-compass mr-1 small text-muted"></i> Place
+                                </label>
+                                <input type="text" id="place" class="form-control custom-input" 
+                                       value="{{ authority.place }}" name="place" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <label class="form-label text-navy font-weight-bold" for="phone">
+                                <i class="fas fa-phone mr-1 small text-muted"></i> Contact Number
+                            </label>
+                            <input type="tel" id="phone" class="form-control custom-input" 
+                                   value="{{ authority.phone }}" name="phone" required>
+                        </div>
+
+                        <div class="form-group mb-5">
+                            <label class="form-label text-navy font-weight-bold" for="email">
+                                <i class="fas fa-envelope mr-1 small text-muted"></i> Email Address
+                            </label>
+                            <input type="email" id="email" class="form-control custom-input" 
+                                   value="{{ authority.email }}" name="email" required>
+                        </div>
+
+                        <div class="d-flex align-items-center justify-content-between pt-2">
+                            <a href="javascript:history.back()" class="text-muted small font-weight-bold">
+                                <i class="fas fa-arrow-left"></i> Cancel
+                            </a>
+                            <button type="submit" class="btn px-5 py-2 shadow-sm text-white font-weight-bold" 
+                                    style="background: linear-gradient(90deg, #37C2CC, #2FAFB8); border-radius: 30px; border: none;">
+                                Save Changes
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    body {
+        background-color: #f8f9fc;
+    }
+
+    .text-navy {
+        color: #0F2F3A;
+        font-size: 0.9rem;
+    }
+
+    /* Professional Input Styling */
+    .custom-input {
+        border: 1px solid #e3e6f0;
+        border-radius: 10px;
+        padding: 12px 15px;
+        transition: all 0.2s ease-in-out;
+        background-color: #fcfdfe;
+    }
+
+    .custom-input:focus {
+        border-color: #37C2CC;
+        box-shadow: 0 0 0 0.2rem rgba(55, 194, 204, 0.1);
+        background-color: #fff;
+        color: #495057;
+    }
+
+    /* Button Animation */
+    button[type="submit"]:hover {
+        opacity: 0.9;
+        transform: translateY(-1px);
+        box-shadow: 0 5px 15px rgba(55, 194, 204, 0.3) !important;
+    }
+
+    .card {
+        animation: fadeInUp 0.5s ease-out;
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translate3d(0, 20px, 0);
+        }
+        to {
+            opacity: 1;
+            transform: translate3d(0, 0, 0);
+        }
+    }
+</style>
+
+{% include 'admin_footer.html' %}

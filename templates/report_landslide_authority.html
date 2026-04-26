@@ -1,0 +1,149 @@
+{% include 'authority_header.html' %}
+
+<style>
+    /* Container for spacing */
+    .table-container {
+        padding: 40px 20px;
+        background-color: #f4f9f9;
+        min-height: 80vh;
+    }
+
+    /* Table Wrapper for Shadow & Radius */
+    .report-table-card {
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 10px 25px rgba(15, 47, 58, 0.1);
+        overflow: hidden; 
+        border: 1px solid #e0e0e0;
+        margin-top: 20px;
+    }
+
+    /* Page Heading */
+    .page-title {
+        color: #0F2F3A;
+        font-weight: 700;
+        margin-bottom: 25px;
+        border-left: 5px solid #2FAFB8;
+        padding-left: 15px;
+    }
+
+    /* Modern Table Styling */
+    .custom-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 0;
+        font-size: 0.95rem;
+    }
+
+    .custom-table thead {
+        background-color: #1B5E63;
+        color: #ffffff;
+        text-align: left;
+    }
+
+    .custom-table th {
+        padding: 15px 20px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        font-size: 0.85rem;
+    }
+
+    .custom-table td {
+        padding: 14px 20px;
+        border-bottom: 1px solid #f0f0f0;
+        color: #444;
+        vertical-align: middle;
+    }
+
+    /* Hover effect for rows */
+    .custom-table tbody tr:hover {
+        background-color: #f0fbfc; 
+        transition: 0.2s ease-in-out;
+    }
+
+    /* Badge for coordinates */
+    .coord-badge {
+        background: #e9f7f8;
+        color: #1B5E63;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-family: 'Courier New', Courier, monospace;
+        font-weight: bold;
+        font-size: 0.85rem;
+    }
+
+    /* UPDATED MAP BUTTON STYLE TO MATCH VIEW_REPORTING_AUTHORITY */
+    .btn-map {
+        background-color: #37C2CC;
+        color: white !important;
+        padding: 6px 12px;
+        border-radius: 6px;
+        text-decoration: none !important;
+        font-size: 0.85rem;
+        font-weight: 600;
+        transition: 0.3s;
+        display: inline-flex;
+        align-items: center;
+        border: none;
+    }
+
+    .btn-map:hover {
+        background-color: #1B5E63;
+        color: white !important;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(55, 194, 204, 0.3);
+    }
+
+    /* Empty State */
+    .empty-state {
+        text-align: center;
+        padding: 40px;
+        color: #888;
+    }
+</style>
+
+<div class="table-container">
+    <div class="container">
+        <h2 class="page-title">My Landslide Reports</h2>
+        
+        <div class="report-table-card">
+            <table class="custom-table">
+                <thead>
+                    <tr>
+                        <th><i class="fas fa-calendar-alt mr-2"></i> Date</th>
+                        <th><i class="fas fa-clock mr-2"></i> Time</th>
+                        <th><i class="fas fa-compass mr-2"></i> Latitude</th>
+                        <th><i class="fas fa-location-arrow mr-2"></i> Longitude</th>
+                        <th class="text-center"><i class="fas fa-map mr-2"></i> Map View</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for report in reports %}
+                    <tr>
+                        <td>{{ report.date }}</td>
+                        <td>{{ report.time }}</td>
+                        <td><span class="coord-badge">{{ report.latitude }}</span></td>
+                        <td><span class="coord-badge">{{ report.longitude }}</span></td>
+                        <td class="text-center">
+                            <a href="https://www.google.com/maps?q={{ report.latitude }},{{ report.longitude }}" 
+                               target="_blank" class="btn-map">
+                                <i class="fas fa-external-link-alt mr-2"></i> Open Map
+                            </a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="5" class="empty-state">
+                            <i class="fas fa-folder-open fa-3x mb-3" style="display:block; color: #ccc;"></i>
+                            No reports have been submitted yet.
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% include 'authority_footer.html' %}

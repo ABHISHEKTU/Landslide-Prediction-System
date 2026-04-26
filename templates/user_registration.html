@@ -1,0 +1,274 @@
+{% include 'home_header.html' %}    
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD3MPnSnyWwNmpnVEFkaddVvy_GWtxSejs&callback=initMap&libraries=places" async defer></script>
+<style>
+    :root {
+        --primary-gradient: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+        --glass-bg: rgba(255, 255, 255, 0.95);
+        --input-bg: #fdfdfd;
+        --border-color: #e2e8f0;
+        --text-main: #2d3748;
+        --accent: #2a5298;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Inter', 'Poppins', sans-serif; /* Cleaner font stack */
+        background: linear-gradient(-45deg, #0F2F3A, #1B5E63, #243B55, #141E30);
+        background-size: 400% 400%;
+        animation: gradientMove 15s ease infinite;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+    @keyframes gradientMove {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    .registration-section {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 80px 20px;
+    }
+
+    .glass-card {
+        width: 100%;
+        max-width: 650px;
+        padding: 40px;
+        border-radius: 24px;
+        background: var(--glass-bg);
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .form-header {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    .form-header h1 {
+        font-weight: 800;
+        font-size: 32px;
+        color: #1a202c;
+        margin: 0;
+        letter-spacing: -0.5px;
+    }
+
+    .form-header p {
+        color: #718096;
+        font-size: 15px;
+        margin-top: 8px;
+    }
+
+    .input-group {
+        margin-bottom: 20px;
+    }
+
+    label {
+        display: flex;
+        align-items: center;
+        font-size: 13px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+        color: #4a5568;
+        margin-bottom: 10px;
+    }
+
+    label i {
+        margin-right: 10px;
+        color: var(--accent);
+        font-size: 14px;
+        width: 18px;
+        text-align: center;
+    }
+
+    input[type="text"], 
+    input[type="password"],
+    input[type="tel"],
+    input[type="email"] {
+        width: 100%;
+        padding: 14px 18px;
+        border-radius: 12px;
+        border: 1.5px solid var(--border-color);
+        font-size: 15px;
+        background: var(--input-bg);
+        transition: all 0.2s ease-in-out;
+        box-sizing: border-box;
+    }
+
+    input:focus {
+        border-color: var(--accent);
+        background: #fff;
+        box-shadow: 0 0 0 4px rgba(42, 82, 152, 0.15);
+        outline: none;
+    }
+
+    .form-row-group {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+
+    input[type="submit"] {
+        width: 100%;
+        padding: 18px;
+        border-radius: 12px;
+        border: none;
+        background: var(--primary-gradient);
+        color: white;
+        font-size: 16px;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-top: 20px;
+        box-shadow: 0 10px 15px -3px rgba(30, 60, 114, 0.3);
+    }
+
+    input[type="submit"]:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 20px 25px -5px rgba(30, 60, 114, 0.4);
+        filter: brightness(1.1);
+    }
+
+    #dvMap {
+        width: 100%;
+        height: 280px;
+        border-radius: 16px;
+        margin: 20px 0;
+        border: 1px solid var(--border-color);
+        overflow: hidden;
+    }
+
+    small {
+        font-size: 12px;
+        color: #a0aec0 !important;
+        margin-top: 6px;
+        display: block;
+    }
+
+    /* Google Map Search Box Styling */
+    .map-search-container {
+        padding: 10px;
+    }
+    
+    .search-box {
+        margin-top: 10px !important;
+        border: 1px solid #ccc !important;
+        padding: 10px 15px !important;
+        border-radius: 8px !important;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.2) !important;
+        width: 250px !important;
+        font-family: inherit;
+    }
+
+    /* Success/Error Message Styling */
+    .message-banner {
+        padding: 15px;
+        border-radius: 10px;
+        text-align: center;
+        margin: 20px auto;
+        max-width: 650px;
+        font-weight: 600;
+    }
+    .green { background: #c6f6d5; color: #22543d; }
+    .red { background: #fff5f5; color: #822727; }
+
+    @media (max-width: 600px) {
+        .form-row-group { grid-template-columns: 1fr; gap: 0; }
+        .glass-card { padding: 25px; border-radius: 0; }
+    }
+</style>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<body>
+    {% if messages %}
+        {% for message in messages %}
+           <div class="message-banner {% if message.tags == 'success' %}green{% else %} red {% endif %}">
+               {{ message }}
+           </div>
+        {% endfor %}
+    {% endif %}
+
+    <div class="registration-section">
+        <div class="glass-card">
+            <div class="form-header">
+                <h1>Create Account</h1>
+                <p>Join our community and start your journey today.</p>
+            </div>
+
+            <form method="POST">
+                {% csrf_token %}
+                
+                <div class="input-group">
+                    <label><i class="fas fa-user-circle"></i> Username</label>
+                    <input type="text" name="username" placeholder="e.g. johndoe_99" required>
+                </div>
+
+                <div class="input-group">
+                    <label><i class="fas fa-lock"></i> Password</label>
+                    <input type="password" id="password" name="password" placeholder="••••••••" required>
+                    <small>Must include Uppercase, Lowercase, Number & Symbol</small>
+                </div>
+
+                <div class="form-row-group">
+                    <div class="input-group">
+                        <label><i class="fas fa-id-card"></i> First Name</label>
+                        <input type="text" name="first_name" placeholder="John" required>
+                    </div>
+                    <div class="input-group">
+                        <label><i class="fas fa-id-card"></i> Last Name</label>
+                        <input type="text" name="last_name" placeholder="Doe" required>
+                    </div>
+                </div>
+
+                <div class="form-row-group">
+                    <div class="input-group">
+                        <label><i class="fas fa-city"></i> District</label>
+                        <input type="text" name="district" placeholder="District" required>
+                    </div>
+                    <div class="input-group">
+                        <label><i class="fas fa-map-pin"></i> Place</label>
+                        <input type="text" name="place" placeholder="City/Town" required>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label><i class="fas fa-phone"></i> Contact Number</label>
+                    <input type="tel" name="phone" placeholder="10-digit mobile number" required>
+                </div>
+
+                <div class="input-group">
+                    <label><i class="fas fa-envelope"></i> Email Address</label>
+                    <input type="email" name="email" placeholder="name@company.com" required>
+                </div>
+
+                <div class="form-row-group">
+                    <div class="input-group">
+                        <label><i class="fas fa-compass"></i> Latitude</label>
+                        <input type="text" id="lati" name="lati" readonly placeholder="Auto-set" style="background: #edf2f7; cursor: not-allowed;">
+                    </div>
+                    <div class="input-group">
+                        <label><i class="fas fa-map"></i> Longitude</label>
+                        <input type="text" id="longi" name="longi" readonly placeholder="Auto-set" style="background: #edf2f7; cursor: not-allowed;">
+                    </div>
+                </div>
+
+                <label><i class="fas fa-map-marked-alt"></i> Select Service Location</label>
+                <div id="dvMap"></div>
+                
+                <input type="submit" value="Complete Registration">
+            </form>
+        </div>
+    </div>
+
+    
+{% include 'home_footer.html' %}

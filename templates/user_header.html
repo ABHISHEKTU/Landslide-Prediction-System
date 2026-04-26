@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Landslide Predictor | Dashboard</title>
+    
+    <link rel="stylesheet" href="/static/common/assets/css/bootstrap-5.0.0-beta2.min.css" />
+    <link rel="stylesheet" href="https://cdn.lineicons.com/3.0/lineicons.css" />
+    
+    <style>
+        :root {
+            --primary: #37C2CC;
+            --primary-dark: #2ba3ad;
+            --dark: #0F2F3A;
+            --light-bg: #f8fafb;
+            --white: #ffffff;
+            --text-main: #324e5a;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            color: var(--text-main);
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* ===== NAVBAR ===== */
+        .navbar-area {
+            background: var(--dark);
+            padding: 12px 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        /* SITE TITLE (NON-CLICKABLE) */
+        .site-title {
+            color: var(--white);
+            font-size: 1.4rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: rgba(255,255,255,0.8) !important;
+            font-weight: 500;
+            margin-left: 15px;
+            transition: 0.3s;
+        }
+
+        .nav-link:hover { 
+            color: var(--primary) !important; 
+        }
+
+        /* ===== HOME BUTTON ===== */
+        .home-btn {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 5px;
+            padding: 6px 15px !important;
+            margin-right: 8px;
+        }
+
+        .home-btn:hover {
+            background: var(--primary);
+            color: white !important;
+            border-color: var(--primary);
+        }
+
+        /* ===== LOGOUT BUTTON ===== */
+        .logout-btn {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 5px;
+            padding: 6px 15px !important;
+        }
+
+        .logout-btn:hover {
+            background: #ff4f58 !important;
+            border-color: #ff4f58 !important;
+            color: white !important;
+        }
+        
+        /* ===== HERO SECTION ===== */
+        .hero-banner {
+            background: linear-gradient(135deg, var(--dark) 0%, #1b4a53 100%);
+            padding: 80px 0 120px;
+            text-align: center;
+            color: white;
+        }
+
+    </style>
+
+    <!-- Leaflet (for maps if needed later) -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+
+</head>
+
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<header class="navbar-area">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-dark">
+
+            <!-- NON-CLICKABLE TITLE -->
+            <span class="site-title">
+                <i class="lni lni-mountain me-2"></i> Landslide Predictor
+            </span>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navContent">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navContent">
+                <ul class="navbar-nav ms-auto align-items-center">
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'view_reporting_users' %}">Authority Reports</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'report_landslide_users' %}">My Reports</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'view_emergencyNoti_users' %}">Admin Notifications</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'view_helpline_users' %}">Helpline</a>
+                    </li>
+
+                    <!-- HOME + LOGOUT BUTTONS -->
+                    <li class="nav-item d-flex align-items-center">
+
+                        <a href="{% url 'user_home' %}" class="nav-link home-btn">
+                            <i class="lni lni-home"></i> Home
+                        </a>
+
+                        <a href="#" class="nav-link logout-btn" data-bs-toggle="modal" data-bs-target="#logoutConfirmModal">
+                            <i class="lni lni-exit"></i> Logout
+                        </a>
+
+                    </li>
+
+                </ul>
+            </div>
+        </nav>
+    </div>
+</header>
+
+<!-- ===== HERO SECTION (OPTIONAL CONTENT) ===== -->
+<!-- <section class="hero-banner">
+    <div class="container">
+        <h2>Welcome, User</h2>
+        <p>Monitor landslide alerts, reports, and safety tools in one place.</p>
+    </div>
+</section> -->
+
+</body>
+</html>

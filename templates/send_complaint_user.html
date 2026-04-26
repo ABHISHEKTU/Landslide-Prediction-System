@@ -1,0 +1,230 @@
+{% include 'user_header.html' %}
+    <style>
+
+    body {
+        background: linear-gradient(135deg, #0F2F3A, #1B5E63);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    /* Remove excessive <br> spacing effect */
+    body br {
+        display: none;
+    }
+
+    /* ===== FORM STYLING ===== */
+
+    form {
+        background-color: #ffffff;
+        padding: 35px;
+        border-radius: 12px;
+        width: 400px;
+        margin: 100px auto 40px auto;
+        box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+    }
+
+    h2 {
+        text-align: center;
+        margin-bottom: 25px;
+        color: #1B5E63;
+        font-weight: 600;
+        letter-spacing: 1px;
+    }
+
+    label {
+        font-weight: 600;
+        color: #0F2F3A;
+    }
+
+    input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        margin-top: 8px;
+        margin-bottom: 20px;
+        border-radius: 6px;
+        border: 1px solid #2FAFB8;
+        outline: none;
+        transition: 0.3s;
+    }
+
+    input[type="text"]:focus {
+        border-color: #37C2CC;
+        box-shadow: 0 0 5px #37C2CC;
+    }
+
+    input[type="submit"] {
+        width: 100%;
+        background-color: #37C2CC;
+        color: white;
+        border: none;
+        padding: 12px;
+        font-size: 16px;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: 0.3s ease;
+    }
+
+    input[type="submit"]:hover {
+        background-color: #2FAFB8;
+    }
+
+    /* ===== TABLE STYLING ===== */
+
+    table {
+        width: 85%;
+        margin: 30px auto 80px auto;
+        border-collapse: collapse;
+        background-color: #ffffff;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    }
+
+    th {
+        background-color: #1B5E63;
+        color: white;
+        padding: 14px;
+        text-transform: uppercase;
+        font-size: 13px;
+        letter-spacing: 1px;
+    }
+
+    td {
+        padding: 12px;
+        text-align: center;
+        color: #0F2F3A;
+        border-bottom: 1px solid #e6f7f8;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f4fcfd;
+    }
+
+    tr:hover {
+        background-color: #37C2CC;
+        transition: 0.3s;
+    }
+
+    tr:hover td {
+        color: white;
+    }
+
+    table[border] {
+        border: none;
+    }
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(55,194,204, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(55,194,204, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(55,194,204, 0); }
+}
+table {
+    animation: pulse 2.5s infinite;
+}
+form {
+    animation: pulse 2.5s infinite;
+}
+/* Container to hold both form and table */
+.horizontal-layout {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start; /* Keeps them aligned at the top */
+    justify-content: space-around; /* Adds even spacing between them */
+    gap: 20px;
+    padding: 100px 5% 40px 5%; /* Adjust top padding instead of <br> tags */
+}
+
+/* Adjust form width to fit side-by-side */
+form {
+    flex: 0 0 350px; /* Form stays at 350px width */
+    margin: 0 !important; /* Remove the auto margins that center it */
+}
+
+/* Adjust table width to fill remaining space */
+.table-wrapper {
+    flex: 1; /* Table takes up the rest of the room */
+    overflow-x: auto; /* Makes table scrollable on small screens */
+}
+
+table {
+    width: 100% !important; /* Overwrite the 85% width */
+    margin: 0 !important;
+}
+
+/* Responsive adjustment: Stack them on top of each other on mobile */
+@media (max-width: 992px) {
+    .horizontal-layout {
+        flex-direction: column;
+        align-items: center;
+    }
+    form, .table-wrapper {
+        width: 100%;
+        max-width: 500px;
+    }
+}
+th, td {
+    text-align: center;   /* Force center alignment */
+    vertical-align: middle;}
+    /* Container to hold both form and table */
+.horizontal-layout {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start; 
+    justify-content: space-around; 
+    gap: 40px; /* Increased gap for better breathing room */
+    
+    /* FIX: Standard gap from header */
+    padding: 150px 5% 80px 5%; 
+    
+    /* Ensures content takes up the screen height */
+    min-height: 85vh; 
+}
+
+/* Optional: Add a slight top margin to the h2 inside the form 
+   if you want the form heading to align perfectly with the table header */
+form h2 {
+    margin-top: 5px;
+}.table-wrapper {
+    flex: 1;
+    overflow-x: auto;
+    /* Keeps the table from looking cramped against the form */
+    margin-left: 10px; 
+}
+</style>
+</head>
+<body>
+    <div class="horizontal-layout">
+        
+        <form method="POST">
+            {% csrf_token %}
+            <h2>Send Complaint</h2>
+            <label>Title:</label>
+            <input type="text" id="title" name="title" required>
+            
+            <label>Description:</label>
+            <input type="text" id="description" name="description" required>
+            
+            <input type="submit" value="Send">
+        </form>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Reply</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for complaint in complaints %}
+                    <tr>
+                        <td>{{ complaint.title }}</td>
+                        <td>{{ complaint.description }}</td>
+                        <td>{{ complaint.reply }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div> </body>
+{% include 'user_footer.html' %}

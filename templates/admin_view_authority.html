@@ -1,0 +1,144 @@
+{% include 'admin_header.html' %}
+
+<div class="container-fluid">
+    {% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-success alert-dismissible fade show shadow-sm" role="alert" style="border-radius:8px;">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert">
+                <span>&times;</span>
+            </button>
+        </div>
+    {% endfor %}
+{% endif %}
+    <div class="welcome-banner shadow-sm d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="h3 mb-0 text-gray-800">Registered Authorities</h1>
+            <p class="mb-0 text-muted">Manage active safety officers and regional department access.</p>
+        </div>
+        <div class="d-flex">
+            <a href="{% url 'admin_manage_authority' %}" class="btn btn-sm btn-teal shadow-sm text-white font-weight-bold mr-2" style="background: #37C2CC; border-radius: 8px;">
+                <i class="fas fa-plus fa-sm text-white-50 mr-1"></i> Add New
+            </a>
+            <i class="fas fa-users-cog fa-2x text-teal ml-3" style="color: #37C2CC;"></i>
+        </div>
+    </div>
+
+    <div class="card shadow mb-4">
+        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between" style="background: white;">
+            <h6 class="m-0 font-weight-bold text-navy" style="color:#0F2F3A">Authority Directory</h6>
+            <!-- <div class="dropdown no-arrow">
+                <button class="btn btn-link btn-sm text-muted" type="button"><i class="fas fa-download mr-1"></i> Export</button>
+            </div> -->
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover" id="dataTable" width="100%" cellspacing="0">
+                    <thead class="bg-light">
+                        <tr class="text-navy" style="color: #0F2F3A; font-size: 0.85rem; text-transform: uppercase;">
+                            <th>Authority Name</th>
+                            <th>Email</th>
+                            <th>Contact</th>
+                            <th>District/Place</th>
+                            <th class="text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in authorities %}
+                        <tr>
+                            <td class="align-middle">
+                                <div class="d-flex align-items-center">
+                                    <div class="avatar-sm mr-3 text-white d-flex align-items-center justify-content-center shadow-sm" 
+                                         style="width: 35px; height: 35px; border-radius: 50%; background: #1B5E63; font-weight: bold; font-size: 12px;">
+                                        {{ i.name|slice:":1"|upper }}
+                                    </div>
+                                    <span class="font-weight-bold text-gray-800">{{ i.name }}</span>
+                                </div>
+                            </td>
+                            <td class="align-middle text-muted">{{ i.email }}</td>
+                            <td class="align-middle">{{ i.phone }}</td>
+                            <td class="align-middle">
+                                <span class="badge badge-light px-3 py-2" style="border-radius: 5px; color: #1B5E63;">
+                                    <i class="fas fa-map-marker-alt mr-1 text-teal"></i> {{ i.district }}, {{ i.place }}
+                                </span>
+                            </td>
+                            <td class="text-center align-middle">
+                                <a href="{% url 'admin_edit_authority' i.id %}" class="btn btn-sm btn-outline-teal mr-1" 
+                                   style="border-color: #37C2CC; color: #37C2CC; border-radius: 5px;" title="Edit">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <a href="#" class="btn btn-sm btn-outline-danger" 
+                                   style="border-radius: 5px;" 
+                                   data-toggle="modal" data-target="#deleteModal{{i.id}}" title="Delete">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+
+                        <div class="modal fade" id="deleteModal{{i.id}}" tabindex="-1" role="dialog" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content" style="border-radius: 12px;">
+                                    <div class="modal-body text-center py-4">
+                                        <i class="fas fa-exclamation-circle fa-3x text-danger mb-3"></i>
+                                        <h5 class="font-weight-bold">Remove Authority?</h5>
+                                        <p class="text-muted">Are you sure you want to delete <strong>{{ i.name }}</strong>? This action cannot be undone.</p>
+                                        <div class="mt-4">
+                                            <button class="btn btn-light mr-2 px-4" data-dismiss="modal">Cancel</button>
+                                            <a href="{% url 'admin_delete_authority' i.id %}" class="btn btn-danger px-4">Delete Now</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="border-radius: 15px; border: none;">
+            <div class="modal-header" style="background: #0F2F3A; color: white; border-top-left-radius: 15px; border-top-right-radius: 15px;">
+                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                <button class="close text-white" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Select "Logout" below if you are ready to end your current session. 
+                <br><small class="text-muted">Ensure all critical landslide alerts have been processed.</small>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal" style="border-radius: 8px;">Cancel</button>
+                <a class="btn btn-danger" href="{% url 'logout' %}" style="border-radius: 8px; background: #e74a3b;">Logout</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content" style="border-radius: 15px; border: none; overflow: hidden;">
+            <div class="modal-header" style="background: #0F2F3A; color: white;">
+                <h5 class="modal-title" id="logoutLabel">Confirm Logout</h5>
+                <button class="close text-white" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body text-center py-4">
+                <i class="fas fa-exclamation-circle fa-3x text-warning mb-3"></i>
+                <p class="mb-0">Are you sure you want to end your session?</p>
+                <small class="text-muted">Any unsaved landslide data analysis may be lost.</small>
+            </div>
+            <div class="modal-footer bg-light">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <a class="btn btn-danger" href="{% url 'logout' %}" style="background: #e74a3b;">Logout Now</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% include 'admin_footer.html' %}

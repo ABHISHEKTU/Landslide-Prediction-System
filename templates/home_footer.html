@@ -1,0 +1,64 @@
+<footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-5">
+                    <h4 class="fw-bold" style="color: var(--accent-teal);">LP.AI</h4>
+                    <p class="mt-4 text-muted">We provide mission-critical landslide intelligence for governments and humanitarian agencies worldwide.</p>
+                </div>
+                <div class="col-lg-2 offset-lg-2 mb-4">
+                    <h5>Resources</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-decoration-none">Documentation</a></li>
+                        <li><a href="#" class="text-decoration-none">API Access</a></li>
+                        <li><a href="#" class="text-decoration-none">Privacy</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <h5>Get in Touch</h5>
+                    <p class="text-muted"><i class="fas fa-envelope me-2"></i> operations@lp-ai.safety</p>
+                    <div class="d-flex gap-3 mt-3">
+                        <a href="#"><i class="fab fa-twitter fa-lg"></i></a>
+                        <a href="#"><i class="fab fa-linkedin fa-lg"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center pt-5 mt-5" style="border-top: 1px solid var(--glass-border);">
+                <p class="small text-muted">© 2026 Landslide Prediction AI. All Systems Operational.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="/static/common/assets/js/bootstrap-5.0.0-beta2.min.js"></script>
+    <script>
+        AOS.init({ duration: 1000, once: true });
+        function initMap() {
+        const defaultLocation = { lat: 9.9312, lng: 76.2673 }; // Kochi
+
+        const map = new google.maps.Map(document.getElementById("dvMap"), {
+            center: defaultLocation,
+            zoom: 12,
+        });
+
+        const marker = new google.maps.Marker({
+            position: defaultLocation,
+            map: map,
+            draggable: true
+        });
+
+        // Update lat/lng when marker is moved
+        google.maps.event.addListener(marker, 'dragend', function (event) {
+            document.getElementById("lati").value = event.latLng.lat();
+            document.getElementById("longi").value = event.latLng.lng();
+        });
+
+        // Click on map to move marker
+        map.addListener("click", function(event) {
+            marker.setPosition(event.latLng);
+            document.getElementById("lati").value = event.latLng.lat();
+            document.getElementById("longi").value = event.latLng.lng();
+        });
+    }
+    </script>
+</body>
+</html>

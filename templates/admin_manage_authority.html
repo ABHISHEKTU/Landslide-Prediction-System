@@ -1,0 +1,135 @@
+{% include 'admin_header.html' %}
+
+<div class="container-fluid">
+    <div class="welcome-banner shadow-sm d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="h3 mb-0 text-gray-800">Authority Management</h1>
+            <p class="mb-0 text-muted">Register new departments or regional safety officers to the system.</p>
+        </div>
+        <i class="fas fa-user-shield fa-2x text-teal" style="color: #37C2CC;"></i>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-xl-6 col-lg-8">
+            <div class="card shadow mb-4 border-left-teal">
+                <div class="card-header py-3 d-flex align-items-center justify-content-between" style="background: white;">
+                    <h6 class="m-0 font-weight-bold text-navy" style="color:#0F2F3A">
+                        <i class="fas fa-plus-circle mr-2"></i>New Authority Registration
+                    </h6>
+                </div>
+                <div class="card-body px-5 py-4">
+                    
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-info alert-dismissible fade show small font-weight-bold" role="alert">
+                                {{ message }}
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+
+                    <form method="POST">
+                        {% csrf_token %}
+                        
+                        <div class="row">
+                            <div class="col-md-6 form-group">
+                                <label class="stat-card-title font-weight-bold text-uppercase mb-1">Full Name</label>
+                                <input type="text" class="form-control bg-light border-0 small" name="name" placeholder="Enter Name" required>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label class="stat-card-title font-weight-bold text-uppercase mb-1">Email Address</label>
+                                <input type="email" class="form-control bg-light border-0 small" name="email" placeholder="email@example.com" required>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 form-group">
+                                <label class="stat-card-title font-weight-bold text-uppercase mb-1">Phone Number</label>
+                                <input type="text" class="form-control bg-light border-0 small" name="phone" placeholder="+91..." required>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label class="stat-card-title font-weight-bold text-uppercase mb-1">District</label>
+                                <input type="text" class="form-control bg-light border-0 small" name="district" placeholder="Assigned District" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="stat-card-title font-weight-bold text-uppercase mb-1">Location/Place</label>
+                            <input type="text" class="form-control bg-light border-0 small" name="place" placeholder="Specific Station or Office" required>
+                        </div>
+
+                        <hr class="my-4">
+
+                        <div class="row">
+                            <div class="col-md-6 form-group">
+                                <label class="stat-card-title font-weight-bold text-uppercase mb-1 text-primary">Username</label>
+                                <input type="text" class="form-control bg-light border-0 small font-weight-bold" name="username" required>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label class="stat-card-title font-weight-bold text-uppercase mb-1 text-primary">Security Password</label>
+                                <input type="password" class="form-control bg-light border-0 small" name="password" required>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-teal btn-block text-white shadow-sm font-weight-bold py-2 mt-4" 
+                                style="background: linear-gradient(90deg, #37C2CC, #1B5E63); border: none; border-radius: 8px;">
+                            <i class="fas fa-check-circle mr-2"></i>Complete Registration
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="border-radius: 15px; border: none;">
+            <div class="modal-header" style="background: #0F2F3A; color: white; border-top-left-radius: 15px; border-top-right-radius: 15px;">
+                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                <button class="close text-white" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Select "Logout" below if you are ready to end your current session. 
+                <br><small class="text-muted">Ensure all critical landslide alerts have been processed.</small>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal" style="border-radius: 8px;">Cancel</button>
+                <a class="btn btn-danger" href="{% url 'logout' %}" style="border-radius: 8px; background: #e74a3b;">Logout</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content" style="border-radius: 15px; border: none; overflow: hidden;">
+            <div class="modal-header" style="background: #0F2F3A; color: white;">
+                <h5 class="modal-title" id="logoutLabel">Confirm Logout</h5>
+                <button class="close text-white" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body text-center py-4">
+                <i class="fas fa-exclamation-circle fa-3x text-warning mb-3"></i>
+                <p class="mb-0">Are you sure you want to end your session?</p>
+                <small class="text-muted">Any unsaved landslide data analysis may be lost.</small>
+            </div>
+            <div class="modal-footer bg-light">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <a class="btn btn-danger" href="{% url 'logout' %}" style="background: #e74a3b;">Logout Now</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include 'admin_footer.html' %}

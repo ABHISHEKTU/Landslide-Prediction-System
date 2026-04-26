@@ -1,0 +1,149 @@
+{% include 'user_header.html' %}
+<style>
+    body {
+        background: linear-gradient(135deg, #0F2F3A, #1B5E63);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        min-height: 100vh;
+    }
+
+    @keyframes pulse {
+        0% { box-shadow: 0 0 0 0 rgba(55, 194, 204, 0.4); }
+        70% { box-shadow: 0 0 0 15px rgba(55, 194, 204, 0); }
+        100% { box-shadow: 0 0 0 0 rgba(55, 194, 204, 0); }
+    }
+
+    h2 {
+        margin-top: 60px;
+        margin-bottom: 10px;
+        font-weight: 700;
+        font-size: 32px;
+        color: #ffffff !important;
+        text-align: center;
+        letter-spacing: 1px;
+    }
+
+    .heading-underline {
+        width: 60px;
+        height: 4px;
+        background: linear-gradient(90deg, #37C2CC, #2FAFB8);
+        margin: 0 auto 40px auto;
+        border-radius: 10px;
+    }
+
+    table {
+        width: 90%; /* Slightly wider to accommodate the extra column */
+        margin: 0 auto 60px auto;
+        border-collapse: collapse;
+        background-color: #ffffff;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        animation: pulse 3s infinite;
+        border: none;
+    }
+
+    th {
+        background-color: #1B5E63;
+        color: white;
+        padding: 18px;
+        text-transform: uppercase;
+        font-size: 13px;
+        letter-spacing: 1.5px;
+        text-align: center;
+        border: none;
+    }
+
+    td {
+        padding: 16px;
+        text-align: center;
+        font-size: 15px;
+        color: #0F2F3A;
+        border-bottom: 1px solid #e6f7f8;
+        vertical-align: middle;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f8fdfe;
+    }
+
+    tr:hover {
+        background-color: #37C2CC;
+        transition: 0.3s ease;
+        cursor: default;
+    }
+
+    tr:hover td {
+        color: white;
+        font-weight: 500;
+    }
+
+    /* Map Button Style */
+    .btn-map-view {
+        background-color: #37C2CC;
+        color: white !important;
+        padding: 6px 14px;
+        border-radius: 6px;
+        text-decoration: none !important;
+        font-size: 0.8rem;
+        font-weight: 600;
+        display: inline-flex;
+        align-items: center;
+        transition: 0.3s;
+        border: 1px solid transparent;
+    }
+
+    .btn-map-view:hover {
+        background-color: #1B5E63;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    tr:hover .btn-map-view {
+        background-color: white;
+        color: #1B5E63 !important;
+    }
+
+    table tr:last-child td {
+        border-bottom: none;
+    }
+</style>
+
+<body>
+    <br><br>
+    <h2>Authority Reports</h2>
+    <div class="heading-underline"></div>
+
+    <table>
+        <thead>
+            <tr>
+                <th><i class="fas fa-calendar-alt me-2"></i> Date</th>
+                <th><i class="fas fa-clock me-2"></i> Time</th>
+                <th><i class="fas fa-map-marker-alt me-2"></i> Latitude</th>
+                <th><i class="fas fa-location-arrow me-2"></i> Longitude</th>
+                <th><i class="fas fa-map me-2"></i> Map View</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for report in reports %}
+            <tr>
+                <td>{{ report.date }}</td>
+                <td>{{ report.time }}</td>
+                <td><strong>{{ report.latitude }}</strong></td>
+                <td><strong>{{ report.longitude }}</strong></td>
+                <td>
+                    <a href="https://www.google.com/maps?q={{ report.latitude }},{{ report.longitude }}" 
+                       target="_blank" class="btn-map-view">
+                        <i class="fas fa-external-link-alt me-2"></i> View Map
+                    </a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5" style="padding: 40px; color: #888;">No reports found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+
+{% include 'user_footer.html' %}

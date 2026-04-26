@@ -1,0 +1,133 @@
+{% include 'admin_header.html' %}
+
+<div class="container-fluid">
+    <div class="welcome-banner shadow-sm d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="h3 mb-0 text-gray-800">Incident Reports</h1>
+            <p class="mb-0 text-muted">Real-time data submissions from regional authorities and field officers.</p>
+        </div>
+        <div class="text-right">
+            <br>
+            <i class="fas fa-satellite fa-2x text-teal" style="color: #37C2CC;"></i>
+        </div>
+    </div>
+
+    <div class="card shadow mb-4">
+        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between" style="background: white;">
+            <h6 class="m-0 font-weight-bold text-navy" style="color:#0F2F3A">Reporting Logs</h6>
+            <div>
+                <span class="badge badge-pill badge-light text-primary border" style="font-size: 0.85rem; padding: 0.5rem 1rem;">
+                    Total Reports: {{ reports|length }}
+                </span>
+            </div>
+            </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover align-items-center" id="dataTable" width="100%" cellspacing="0">
+                    <thead class="bg-light">
+                        <tr class="text-navy" style="color: #0F2F3A; font-size: 0.8rem; text-transform: uppercase;">
+                            <th>Reporting Authority</th>
+                            <th>Timestamp</th>
+                            <th>GPS Coordinates</th>
+                            <th class="text-center">Map View</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for report in reports %}
+                        <tr>
+                            <td class="align-middle">
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-user-circle fa-lg mr-2 text-gray-400"></i>
+                                    <span class="font-weight-bold text-gray-800">{{ report.AUTHORITY_ID.name }}</span>
+                                </div>
+                            </td>
+                            <td class="align-middle text-muted small">
+                                <div><i class="far fa-calendar-alt mr-1"></i> {{ report.date }}</div>
+                                <div><i class="far fa-clock mr-1"></i> {{ report.time }}</div>
+                            </td>
+                            <td class="align-middle font-italic text-navy" style="font-size: 0.9rem;">
+                                {{ report.latitude }}, {{ report.longitude }}
+                            </td>
+                            <td class="text-center align-middle">
+                                <a href="https://www.google.com/maps?q={{ report.latitude }},{{ report.longitude }}" 
+                                   target="_blank" 
+                                   class="btn btn-sm btn-circle btn-teal shadow-sm" 
+                                   style="background: #37C2CC; color: white; border: none;"
+                                   title="View on Map">
+                                    <i class="fas fa-location-arrow"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="4" class="text-center py-5">
+                                <i class="fas fa-clipboard-list fa-3x text-gray-200 mb-3"></i>
+                                <p class="text-muted">No reports have been filed by authorities yet.</p>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Styling kept for potential status indicators */
+    .pulse-red {
+        background-color: #e74a3b;
+        color: white;
+        box-shadow: 0 0 0 0 rgba(231, 74, 59, 0.7);
+        animation: pulse 1.5s infinite;
+    }
+    @keyframes pulse {
+        0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(231, 74, 59, 0.7); }
+        70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(231, 74, 59, 0); }
+        100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(231, 74, 59, 0); }
+    }
+</style>
+
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="border-radius: 15px; border: none;">
+            <div class="modal-header" style="background: #0F2F3A; color: white; border-top-left-radius: 15px; border-top-right-radius: 15px;">
+                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                <button class="close text-white" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Select "Logout" below if you are ready to end your current session. 
+                <br><small class="text-muted">Ensure all critical landslide alerts have been processed.</small>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal" style="border-radius: 8px;">Cancel</button>
+                <a class="btn btn-danger" href="{% url 'logout' %}" style="border-radius: 8px; background: #e74a3b;">Logout</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content" style="border-radius: 15px; border: none; overflow: hidden;">
+            <div class="modal-header" style="background: #0F2F3A; color: white;">
+                <h5 class="modal-title" id="logoutLabel">Confirm Logout</h5>
+                <button class="close text-white" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body text-center py-4">
+                <i class="fas fa-exclamation-circle fa-3x text-warning mb-3"></i>
+                <p class="mb-0">Are you sure you want to end your session?</p>
+                <small class="text-muted">Any unsaved landslide data analysis may be lost.</small>
+            </div>
+            <div class="modal-footer bg-light">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <a class="btn btn-danger" href="{% url 'logout' %}" style="background: #e74a3b;">Logout Now</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include 'admin_footer.html' %}

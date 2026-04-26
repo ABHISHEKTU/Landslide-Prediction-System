@@ -1,0 +1,69 @@
+{% include 'authority_header.html' %}
+    <style>
+        /* body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #f2f2f2;
+            font-family: Arial, sans-serif;
+        } */
+
+        form {
+            background-color: #ffffff;
+            padding: 25px 35px;
+            border-radius: 8px;
+            width: 320px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.15);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            margin-top: 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 4px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <form>
+        <h2>Report L</h2>
+        <label>Place:</label><br>
+        <input type="text" id="place" name="place" ><br><br>
+        <label>Date:</label><br>   
+        <input type="text" id="date" name="date" ><br><br>
+        <label>Time:</label><br>
+        <input type="text" id="time" name="time" ><br><br>
+        <label>Latitude:</label><br>
+        <input type="text" id="latitude" name="latitude" ><br><br>
+        <label>Longitude:</label><br>
+        <input type="text" id="longitude" name="longitude" ><br><br>
+        <input type="submit" value="Submit">
+    </form>

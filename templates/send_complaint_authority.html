@@ -1,0 +1,173 @@
+{% include 'authority_header.html' %}
+
+<style>
+    .complaint-section {
+        padding: 60px 20px;
+        background-color: #f4f9f9;
+        min-height: 85vh;
+    }
+
+    /* Professional Card for Form */
+    .complaint-card {
+        background: white;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(15, 47, 58, 0.08);
+        border-top: 5px solid #1B5E63;
+    }
+
+    .complaint-card h2 {
+        color: #0F2F3A;
+        font-weight: 700;
+        text-align: left;
+        margin-bottom: 25px;
+        font-size: 1.5rem;
+    }
+
+    /* Form Styling */
+    .form-group label {
+        color: #1B5E63;
+        font-weight: 600;
+        margin-bottom: 8px;
+        display: block;
+    }
+
+    .form-control {
+        border: 1px solid #d1d9db;
+        border-radius: 6px;
+        padding: 12px;
+        transition: all 0.3s;
+    }
+
+    .form-control:focus {
+        border-color: #37C2CC;
+        box-shadow: 0 0 0 0.2rem rgba(55, 194, 204, 0.25);
+    }
+
+    textarea.form-control {
+        resize: none;
+        height: 120px;
+    }
+
+    .btn-send {
+        background-color: #2FAFB8;
+        color: white;
+        border: none;
+        padding: 12px;
+        font-weight: 600;
+        border-radius: 6px;
+        width: 100%;
+        margin-top: 10px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .btn-send:hover {
+        background-color: #1B5E63;
+        transform: translateY(-2px);
+    }
+
+    /* Table Styling */
+    .history-card {
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(15, 47, 58, 0.08);
+        overflow: hidden;
+    }
+
+    .custom-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .custom-table thead {
+        background-color: #0F2F3A;
+        color: white;
+    }
+
+    .custom-table th {
+        padding: 15px;
+        font-size: 0.85rem;
+        text-transform: uppercase;
+    }
+
+    .custom-table td {
+        padding: 15px;
+        border-bottom: 1px solid #eee;
+        vertical-align: top;
+    }
+
+    /* Reply Status Badge */
+    .status-badge {
+        font-size: 0.8rem;
+        padding: 4px 10px;
+        border-radius: 20px;
+        font-weight: 600;
+    }
+
+    .pending { background: #fff3cd; color: #856404; }
+    .replied { background: #d4edda; color: #155724; }
+</style>
+
+<div class="complaint-section">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-4 mb-4">
+                <div class="complaint-card">
+                    <h2><i class="fas fa-paper-plane mr-2"></i>New Complaint</h2>
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="form-group mb-3">
+                            <label>Title</label>
+                            <input type="text" name="title" class="form-control" placeholder="Brief subject..." required>
+                        </div>
+                        <div class="form-group mb-4">
+                            <label>Description</label>
+                            <textarea name="description" class="form-control" placeholder="Describe the issue in detail..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn-send">
+                            Send Complaint
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-lg-8">
+                <h3 class="mb-4" style="color: #0F2F3A; font-weight: 700;">Complaint History</h3>
+                <div class="history-card">
+                    <table class="custom-table">
+                        <thead>
+                            <tr>
+                                <th>Subject</th>
+                                <th>Details</th>
+                                <th>Status / Reply</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for complaint in complaints %}
+                            <tr>
+                                <td style="font-weight: 600; color: #1B5E63;">{{ complaint.title }}</td>
+                                <td class="text-muted small">{{ complaint.description }}</td>
+                                <td>
+                                    {% if complaint.reply %}
+                                        <span class="status-badge replied mb-2 d-inline-block">Replied</span>
+                                        <p class="small mb-0">{{ complaint.reply }}</p>
+                                    {% else %}
+                                        <span class="status-badge pending">Pending Analysis</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="3" class="text-center py-5 text-muted">No complaints filed yet.</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include 'authority_footer.html' %}

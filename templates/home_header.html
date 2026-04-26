@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Landslide Predictor | Professional AI Safety</title>
+
+    <link rel="stylesheet" href="/static/common/assets/css/bootstrap-5.0.0-beta2.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-dark: #0F2F3A;
+            --accent-teal: #37C2CC;
+            --glass-white: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(55, 194, 204, 0.15);
+            --text-muted: #a3b1b6;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-dark) !important;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        /* ===== MODERN NAVBAR ===== */
+        .header {
+            background: rgba(15, 47, 58, 0.85) !important;
+            backdrop-filter: blur(15px);
+            padding: 15px 0;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .navbar-brand {
+            font-weight: 800;
+            letter-spacing: -1px;
+            color: var(--accent-teal) !important;
+            font-size: 1.5rem;
+        }
+
+        .nav-link {
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: 0.3s;
+            margin: 0 10px;
+        }
+
+        .nav-link:hover { color: var(--accent-teal) !important; }
+
+        /* ===== HERO SECTION ===== */
+        .hero-section {
+            padding: 160px 0 100px 0;
+            position: relative;
+        }
+
+        /* Abstract Glow Backgrounds */
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -10%; right: -10%;
+            width: 400px; height: 400px;
+            background: radial-gradient(circle, rgba(55, 194, 204, 0.15) 0%, transparent 70%);
+            z-index: -1;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            line-height: 1.1;
+            background: linear-gradient(135deg, #ffffff 50%, var(--accent-teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 25px;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 35px;
+        }
+
+        /* ===== BUTTONS ===== */
+        .main-btn {
+            background: var(--accent-teal);
+            color: var(--bg-dark);
+            padding: 16px 40px;
+            border-radius: 12px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: inline-block;
+            box-shadow: 0 10px 30px rgba(55, 194, 204, 0.3);
+        }
+
+        .main-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(55, 194, 204, 0.5);
+            color: var(--bg-dark);
+        }
+
+        /* ===== STATS SECTION ===== */
+        .stats-card {
+            background: var(--glass-white);
+            border: 1px solid var(--glass-border);
+            padding: 30px;
+            border-radius: 20px;
+            transition: 0.3s;
+        }
+
+        .stat-number {
+            color: var(--accent-teal);
+            font-size: 3rem;
+            font-weight: 800;
+            display: block;
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* ===== FEATURE BOXES ===== */
+        .feature-box {
+            background: var(--glass-white);
+            padding: 45px 35px;
+            border-radius: 24px;
+            border: 1px solid var(--glass-border);
+            height: 100%;
+            transition: 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-box:hover {
+            background: rgba(55, 194, 204, 0.05);
+            transform: translateY(-10px);
+            border-color: var(--accent-teal);
+        }
+
+        .feature-box i {
+            font-size: 3rem;
+            margin-bottom: 25px;
+            display: block;
+            background: linear-gradient(135deg, var(--accent-teal), #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .feature-box h4 {
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+
+        /* ===== STEP PROGRESS ===== */
+        .step-circle {
+            width: 60px;
+            height: 60px;
+            background: var(--bg-dark);
+            border: 2px solid var(--accent-teal);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            color: var(--accent-teal);
+            margin: 0 auto 20px;
+            font-size: 1.2rem;
+            box-shadow: 0 0 20px rgba(55, 194, 204, 0.2);
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            padding: 80px 0 30px;
+            border-top: 1px solid var(--glass-border);
+            background: rgba(0,0,0,0.2);
+        }
+
+        .footer h5 {
+            color: #fff;
+            font-weight: 700;
+            margin-bottom: 25px;
+        }
+
+        .footer a {
+            color: var(--text-muted);
+            transition: 0.3s;
+        }
+
+        .footer a:hover {
+            color: var(--accent-teal);
+            padding-left: 5px;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <header class="header sticky-top">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-dark">
+                <a class="navbar-brand" href="#"><i class="fas fa-mountain me-2"></i>Landslide Predictor.AI</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navContent">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navContent">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link px-3" href="{% url 'home' %}">Home</a></li>
+                        <li class="nav-item"><a class="nav-link px-3" href="{% url 'about' %}">How it Works</a></li>
+                        <li class="nav-item"><a class="nav-link px-3" href="{% url 'login' %}">Login</a></li>
+                        <li class="nav-item ms-lg-3"><a class="main-btn py-2 px-4" style="font-size: 0.9rem;" href="{% url 'user_registration' %}">Sign Up</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>

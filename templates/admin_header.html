@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+<link href="/static/admin/css/sb-admin-2.min.css" rel="stylesheet">
+
+<style>
+    body { background: #F4FBFC; font-family: 'Nunito', sans-serif; }
+    .sidebar { 
+        background: linear-gradient(180deg, #0F2F3A 0%, #1B5E63 100%) !important; 
+        box-shadow: 4px 0 15px rgba(0,0,0,0.1); 
+    }
+    .topbar { background-color: white !important; }
+    .welcome-banner {
+        background: white;
+        padding: 25px;
+        border-radius: 15px;
+        border-bottom: 4px solid #37C2CC;
+        margin-bottom: 30px;
+    }
+    .action-btn {
+        background: #37C2CC;
+        color: white; border: none;
+        padding: 8px 20px; border-radius: 8px;
+        font-weight: 600; transition: 0.3s;
+    }
+    .action-btn:hover { background: #1B5E63; color: white; text-decoration: none; }
+    .border-left-teal { border-left: 0.25rem solid #37C2CC !important; }
+    .border-left-navy { border-left: 0.25rem solid #0F2F3A !important; }
+    .stat-card-title { font-size: 0.75rem; letter-spacing: 1px; color: #1B5E63 !important; }
+    .nav-logout .nav-link {
+    transition: 0.3s;
+}
+
+.nav-logout .nav-link:hover .logout-wrapper {
+    background: #e74a3b !important;
+}
+
+.nav-logout .nav-link:hover .logout-wrapper span,
+.nav-logout .nav-link:hover .logout-wrapper i {
+    color: white !important;
+}
+
+.sidebar-heading {
+    color: rgba(255, 255, 255, 0.4);
+    font-weight: 800;
+    font-size: 0.65rem;
+    padding: 0 1rem;
+    margin-top: 1rem;
+    text-transform: uppercase;
+}
+.hover-card { transition: transform 0.2s ease-in-out; }
+.hover-card:hover { transform: translateY(-5px); border-bottom: 3px solid #37C2CC; }
+</style>
+
+<nav class="navbar navbar-expand navbar-light topbar mb-4 static-top shadow">
+    <div class="d-flex align-items-center">
+        <img class="img-profile rounded-circle mr-2" src="https://ui-avatars.com/api/?name=Admin&background=0F2F3A&color=fff" style="width: 35px; height: 35px;">
+        <span class="text-gray-800 font-weight-bold" style="font-size: 1rem;">Admin Dashboard</span>
+    </div>
+
+    <ul class="navbar-nav ml-auto align-items-center">
+        
+        <li class="nav-item">
+            <a class="nav-link text-gray-600 mr-2" href="{% url 'admin_home' %}" title="Dashboard Home">
+                <i class="fas fa-home fa-lg"></i>
+                <span class="ml-1 d-none d-md-inline">Home</span>
+            </a>
+        </li>
+
+        <div class="topbar-divider d-none d-sm-block"></div>
+
+        <li class="nav-item">
+            <a class="btn btn-sm btn-outline-danger ml-2 d-flex align-items-center" 
+               href="#" 
+               data-toggle="modal" 
+               data-target="#logoutModal"
+               style="border-radius: 20px; padding: 5px 15px; font-weight: 700;">
+                <i class="fas fa-sign-out-alt mr-2"></i>
+                <span>Logout</span>
+            </a>
+        </li>
+    </ul>
+</nav>
