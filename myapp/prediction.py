@@ -38,20 +38,23 @@ GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 # Input image size expected by the model
 IMG_SIZE = (224, 224)
 
-print("\n================ MODEL LOADING ================")
-print("MODEL PATH :", MODEL_PATH)
-print("IMG SIZE   :", IMG_SIZE)
+model = None
+gemini_model = None
 
-# Load the trained model without recompiling
-model = load_model(MODEL_PATH, compile=False)
+def get_model():
+    global model
+    if model is None:
+        print("Loading model...")
+        model = load_model(MODEL_PATH, compile=False)
+        print("✅ Model loaded")
+    return model
 
-print("✅ Model loaded successfully")
-print("Model inputs :", model.inputs)
-print("Model outputs:", model.outputs)
-
-# Configure Gemini AI model for generating risk analysis text
-genai.configure(api_key=GEMINI_API_KEY)
-gemini_model = genai.GenerativeModel("gemini-2.5-flash")
+def get_gemini():
+    global gemini_model
+    if gemini_model is None:
+        genai.configure(api_key=GEMINI_API_KEY)
+        gemini_model = genai.GenerativeModel("gemini-2.5-flash")
+    return gemini_model
 
 print("✅ Gemini configured")
 print("==============================================\n")
@@ -245,7 +248,7 @@ def landslide_prediction(request):
         sat_in = np.expand_dims(load_image_from_disk(sat_p), axis=0)
         dem_in = np.expand_dims(load_image_from_disk(dem_p, dem=True), axis=0)
 
-        pred = model.predict([sat_in, dem_in], verbose=0)
+        pred = get_model().predict([sat_in, dem_in], verbose=0)
         prob = float(pred[0][0])
 
         ml_res = "Landslide Prone" if prob >= 0.5 else "Safe Area"
@@ -275,7 +278,7 @@ Temperature: {current_weather['temp']}
 Humidity: {current_weather['humidity']}
 10 Day Rainfall: {history['total_rain']} mm
 """
-            ai_txt = gemini_model.generate_content(prompt).text
+            ai_txt = get_gemini().generate_content(prompt).text
             print("✅ Gemini response received")
 
         except Exception as e:
