@@ -12,3 +12,5 @@ gunicorn>=20.1
 python-dotenv>=0.21
 
 mysqlclient
+
+google-generativeai
