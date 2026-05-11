@@ -82,8 +82,11 @@ DATABASES = {
         'NAME': os.getenv('MYSQL_DATABASE', 'landslide_detection'),
         'USER': os.getenv('MYSQL_USER', 'root'),
         'PASSWORD': os.getenv('MYSQL_PASSWORD', 'root'),
-        'HOST': os.getenv('MYSQL_HOST', 'localhost'),
+        'HOST': os.getenv('MYSQL_HOST', '127.0.0.1'),
         'PORT': os.getenv('MYSQL_PORT', '3306'),
+        'OPTIONS': {
+            'connect_timeout': 10,
+        },
     }
 }
 
