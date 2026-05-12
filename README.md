@@ -5,9 +5,12 @@
   <img src="https://img.shields.io/badge/Django-4.x-green?style=for-the-badge&logo=django" />
   <img src="https://img.shields.io/badge/Model-CNN-orange?style=for-the-badge&logo=tensorflow" />
   <img src="https://img.shields.io/badge/Status-Academic%20Project-purple?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Live%20Demo-Online-success?style=for-the-badge&logo=railway" />
+  <img src="https://img.shields.io/badge/Demo-landslide--prediction.up.railway.app-blue?style=for-the-badge" />
 </p>
 
 > **ML-based system to predict landslide risk using satellite images and real-time weather data.**
+>  🌐 **Live Demo:** [landslide-prediction.up.railway.app](https://landslide-prediction.up.railway.app)
 
 ---
 
