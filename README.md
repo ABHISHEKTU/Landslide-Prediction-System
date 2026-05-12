@@ -10,7 +10,7 @@
 </p>
 
 > **ML-based system to predict landslide risk using satellite images and real-time weather data.**
->  🌐 **Live Demo:** [landslide-prediction.up.railway.app](https://landslide-prediction.up.railway.app)
+> > 🌐 **Live Demo:** [landslide-prediction.up.railway.app](https://landslide-prediction.up.railway.app)
 
 ---
 
